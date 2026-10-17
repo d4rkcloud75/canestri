@@ -468,7 +468,7 @@ add_action(
 			}
 			return false;
 		};
-		foreach ( (array) $scripts->queue as $h ) {
+		foreach ( array_keys( $scripts->registered ) as $h ) {
 			if ( $needs( $h ) ) {
 				$scripts->add_data( $h, 'group', 1 );
 			}
