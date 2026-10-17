@@ -447,3 +447,35 @@ add_action(
 		$scripts->registered['jquery']->deps = array_diff( (array) $scripts->registered['jquery']->deps, array( 'jquery-migrate' ) );
 	}
 );
+
+/** Tutti gli script che dipendono da jQuery vanno nel footer, così jQuery non blocca l'intestazione. */
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		if ( is_admin() ) {
+			return;
+		}
+		$scripts = wp_scripts();
+		$needs   = function ( $h, $seen = array() ) use ( &$needs, $scripts ) {
+			if ( in_array( $h, $seen, true ) || empty( $scripts->registered[ $h ] ) ) {
+				return false;
+			}
+			$seen[] = $h;
+			foreach ( (array) $scripts->registered[ $h ]->deps as $d ) {
+				if ( in_array( $d, array( 'jquery', 'jquery-core' ), true ) || $needs( $d, $seen ) ) {
+					return true;
+				}
+			}
+			return false;
+		};
+		foreach ( (array) $scripts->queue as $h ) {
+			if ( $needs( $h ) ) {
+				$scripts->add_data( $h, 'group', 1 );
+			}
+		}
+		foreach ( array( 'jquery', 'jquery-core' ) as $h ) {
+			$scripts->add_data( $h, 'group', 1 );
+		}
+	},
+	1003
+);
