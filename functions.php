@@ -479,3 +479,14 @@ add_action(
 	},
 	1003
 );
+
+/** jQuery stampato all'inizio del footer, prima degli script in linea dei plugin che lo usano. */
+add_action(
+	'wp_footer',
+	function () {
+		if ( ! is_admin() && ! wp_script_is( 'jquery', 'done' ) ) {
+			wp_print_scripts( array( 'jquery' ) );
+		}
+	},
+	1
+);
