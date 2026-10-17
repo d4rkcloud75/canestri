@@ -591,3 +591,29 @@ add_action(
 	},
 	1
 );
+
+/**
+ * I pochi fogli dei blocchi che bloccavano la prima visualizzazione (copertina, menu,
+ * icone social, immagine prodotto) vengono scritti dentro la pagina: sono piccoli
+ * e così il browser non aspetta altre richieste prima di disegnare l'hero.
+ */
+add_filter(
+	'style_loader_tag',
+	function ( $tag, $handle, $href ) {
+		if ( is_admin() || ! $href || ! preg_match( '#/(blocks/(cover|navigation|social-links)/style\.min\.css|product-image\.min\.css)#', $href ) ) {
+			return $tag;
+		}
+		$path = wp_parse_url( $href, PHP_URL_PATH );
+		$file = $path ? ABSPATH . ltrim( $path, '/' ) : '';
+		if ( ! $file || ! is_readable( $file ) ) {
+			return $tag;
+		}
+		$css = (string) file_get_contents( $file );
+		if ( '' === $css || false !== stripos( $css, 'url(' ) || strlen( $css ) > 20000 ) {
+			return $tag;
+		}
+		return '<style id="' . esc_attr( $handle ) . '-css">' . $css . '</style>' . "\n";
+	},
+	20,
+	3
+);
