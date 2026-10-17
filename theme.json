@@ -44,10 +44,7 @@
      "name": "Blu scuro",
      "color": "#155A96"
     }
-   ],
-   "defaultPalette": false,
-   "defaultGradients": false,
-   "defaultDuotone": false
+   ]
   },
   "typography": {
    "fontFamilies": [

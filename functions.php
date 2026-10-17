@@ -326,7 +326,8 @@ function canestri_set_sizes( $html, $sizes ) {
 		function ( $m ) use ( $sizes ) {
 			$tag = $m[0];
 			if ( false === strpos( $tag, 'srcset=' ) ) {
-				return $tag;
+				/* srcset arriva dopo (wp_filter_content_tags): lasciamo un segnaposto letto da wp_content_img_tag. */
+				return preg_replace( '/^<img\b/i', '<img data-csizes="' . esc_attr( $sizes ) . '"', $tag, 1 );
 			}
 			$auto = preg_match( '/sizes="auto,/', $tag ) ? 'auto, ' : '';
 			return preg_replace( '/\ssizes="[^"]*"/', ' sizes="' . $auto . $sizes . '"', $tag, 1 );
@@ -334,6 +335,21 @@ function canestri_set_sizes( $html, $sizes ) {
 		$html
 	);
 }
+add_filter(
+	'wp_content_img_tag',
+	function ( $tag ) {
+		if ( ! preg_match( '/\sdata-csizes="([^"]*)"/', $tag, $m ) ) {
+			return $tag;
+		}
+		$tag = str_replace( $m[0], '', $tag );
+		if ( false === strpos( $tag, 'srcset=' ) ) {
+			return $tag;
+		}
+		$auto = preg_match( '/sizes="auto,/', $tag ) ? 'auto, ' : '';
+		return preg_replace( '/\ssizes="[^"]*"/', ' sizes="' . $auto . $m[1] . '"', $tag, 1 );
+	},
+	20
+);
 add_filter(
 	'render_block',
 	function ( $html, $block ) {
@@ -348,6 +364,12 @@ add_filter(
 			case 'core/gallery':
 				return canestri_set_sizes( $html, '(max-width: 781px) 46vw, 300px' );
 			case 'core/group':
+				if ( preg_match( '/(^|\s)canestri-gallery(\s|$)/', $class ) ) {
+					return canestri_set_sizes( $html, '(max-width: 781px) 46vw, 300px' );
+				}
+				if ( false !== strpos( $class, 'canestri-occ-grid' ) ) {
+					return canestri_set_sizes( $html, '(max-width: 781px) 46vw, 390px' );
+				}
 				if ( false !== strpos( $class, 'canestri-about-sec' ) ) {
 					return canestri_set_sizes( $html, '(max-width: 781px) 92vw, 520px' );
 				}
