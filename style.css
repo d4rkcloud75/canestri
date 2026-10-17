@@ -4,7 +4,7 @@ Theme URI: https://canestriautonoleggi.com/
 Author: Carmelo Brischetto
 Description: Tema figlio a blocchi di Twenty Twenty-Five per Canestri Autonoleggi.
 Template: twentytwentyfive
-Version: 0.14.0
+Version: 0.14.1
 Requires at least: 6.7
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
@@ -444,3 +444,16 @@ html{scroll-behavior:smooth}
  .canestri-header .is-menu-open .wp-block-navigation__responsive-container-close{right:20px}
 }
 @media (max-width:360px){.canestri-header .canestri-logo img{width:100px!important}.canestri-header-cta .wp-block-button__link{padding:7px 9px!important;font-size:.68rem!important}}
+
+/* 0.14.1: pagina FAQ */
+.canestri-faq-page .canestri-page-head{padding:clamp(40px,6vw,72px) var(--wp--preset--spacing--30)!important;margin:0}
+.canestri-faq-page .canestri-page-head .canestri-limo-h1{font-size:clamp(1.6rem,3.4vw,2.6rem)!important;max-width:none}
+.canestri-faq-page .canestri-kicker{color:var(--wp--preset--color--dark)}
+.canestri-faq-sec .canestri-limo-h2{font-size:clamp(1.2rem,2.2vw,1.6rem)!important;margin:40px 0 16px!important}
+.canestri-faq-sec>.canestri-limo-h2:first-child{margin-top:0!important}
+.canestri-faq-sec .canestri-faq{background:var(--wp--preset--color--base-2)}
+.canestri-faq summary{list-style:none;position:relative;padding-right:28px}
+.canestri-faq summary::-webkit-details-marker{display:none}
+.canestri-faq summary::after{content:"+";position:absolute;right:0;top:-2px;font-size:1.4rem;color:var(--wp--preset--color--accent);transition:transform .2s}
+.canestri-faq[open] summary::after{transform:rotate(45deg)}
+.canestri-faq-cta{margin-top:40px!important}

@@ -380,3 +380,37 @@ add_filter(
 );
 add_filter( 'render_block_woocommerce/mini-cart', function ( $html ) { return is_admin() ? $html : ''; } );
 add_filter( 'render_block_woocommerce/customer-account', function ( $html ) { return is_admin() ? $html : ''; } );
+
+/**
+ * Pagina FAQ: dati strutturati FAQPage e testi SEO (se non impostati in Yoast).
+ */
+add_action(
+	'wp_head',
+	function () {
+		if ( ! is_page( 'faq' ) ) {
+			return;
+		}
+		$file = get_stylesheet_directory() . '/assets/faq-schema.json';
+		if ( file_exists( $file ) ) {
+			echo '<script type="application/ld+json">' . file_get_contents( $file ) . '</script>' . "\n"; // phpcs:ignore
+		}
+	}
+);
+add_filter(
+	'wpseo_metadesc',
+	function ( $desc ) {
+		if ( is_page( 'faq' ) && '' === trim( (string) $desc ) ) {
+			return 'Quanto costa un\'auto d\'epoca per il matrimonio a Roma, autista, nastri e fiori, prenotazione: tutte le risposte di Canestri Autonoleggi. Preventivo gratuito in giornata.';
+		}
+		return $desc;
+	}
+);
+add_filter(
+	'wpseo_title',
+	function ( $title ) {
+		if ( is_page( 'faq' ) ) {
+			return 'Domande frequenti sul noleggio auto per matrimoni a Roma | Canestri Autonoleggi';
+		}
+		return $title;
+	}
+);
