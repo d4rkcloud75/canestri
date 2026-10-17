@@ -414,3 +414,26 @@ add_filter(
 		return $title;
 	}
 );
+
+/**
+ * Prestazioni: meno file che bloccano la prima visualizzazione.
+ * - gli stili dei blocchi e il foglio di stile del tema vengono scritti dentro la pagina invece che caricati a parte;
+ * - jQuery Migrate (serve solo a vecchi plugin) non viene caricato sul sito pubblico.
+ */
+add_filter( 'styles_inline_size_limit', function () { return 120000; } );
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		wp_style_add_data( 'canestri-style', 'path', get_stylesheet_directory() . '/style.css' );
+	},
+	20
+);
+add_action(
+	'wp_default_scripts',
+	function ( $scripts ) {
+		if ( is_admin() || empty( $scripts->registered['jquery'] ) ) {
+			return;
+		}
+		$scripts->registered['jquery']->deps = array_diff( (array) $scripts->registered['jquery']->deps, array( 'jquery-migrate' ) );
+	}
+);
