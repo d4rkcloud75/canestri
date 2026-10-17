@@ -600,7 +600,7 @@ add_action(
 add_filter(
 	'style_loader_tag',
 	function ( $tag, $handle, $href ) {
-		if ( is_admin() || ! $href || ! preg_match( '#/(blocks/(cover|navigation|social-links)/style\.min\.css|product-image\.min\.css)#', $href ) ) {
+		if ( is_admin() || ! $href || ! preg_match( '#/(blocks/(cover|navigation|social-links)/style\.min\.css|product-image(\.min)?\.css)#', $href ) ) {
 			return $tag;
 		}
 		$path = wp_parse_url( $href, PHP_URL_PATH );
