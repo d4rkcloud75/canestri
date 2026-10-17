@@ -626,7 +626,7 @@ add_filter(
 add_filter(
 	'script_module_data_@wordpress/interactivity',
 	function ( $data ) {
-		if ( is_admin() || empty( $data['state']['woocommerce/products']['products'] ) || ! is_array( $data['state']['woocommerce/products']['products'] ) ) {
+		if ( is_admin() || is_singular( 'product' ) || empty( $data['state']['woocommerce/products']['products'] ) || ! is_array( $data['state']['woocommerce/products']['products'] ) ) {
 			return $data;
 		}
 		$keep = array( 'id', 'name', 'slug', 'parent', 'type', 'permalink', 'is_purchasable', 'is_in_stock', 'has_options' );
