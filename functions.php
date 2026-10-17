@@ -420,7 +420,6 @@ add_filter(
  * - gli stili dei blocchi e il foglio di stile del tema vengono scritti dentro la pagina invece che caricati a parte;
  * - jQuery Migrate (serve solo a vecchi plugin) non viene caricato sul sito pubblico.
  */
-add_filter( 'styles_inline_size_limit', function () { return 120000; } );
 add_action(
 	'wp_enqueue_scripts',
 	function () {
