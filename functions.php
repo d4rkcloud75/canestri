@@ -360,7 +360,7 @@ add_filter(
 		switch ( $block['blockName'] ) {
 			case 'woocommerce/product-template':
 			case 'core/post-template':
-				return canestri_set_sizes( $html, '(max-width: 600px) 88vw, (max-width: 781px) 45vw, 390px' );
+				return canestri_set_sizes( $html, '(max-width: 600px) 55vw, (max-width: 781px) 45vw, 390px' );
 			case 'core/gallery':
 				return canestri_set_sizes( $html, '(max-width: 781px) 46vw, 300px' );
 			case 'core/group':
