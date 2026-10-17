@@ -329,7 +329,7 @@ function canestri_set_sizes( $html, $sizes ) {
 				/* srcset arriva dopo (wp_filter_content_tags): lasciamo un segnaposto letto da wp_content_img_tag. */
 				return preg_replace( '/^<img\b/i', '<img data-csizes="' . esc_attr( $sizes ) . '"', $tag, 1 );
 			}
-			$auto = preg_match( '/sizes="auto,/', $tag ) ? 'auto, ' : '';
+			$auto = ''; // niente "auto": altrimenti il browser ignora le misure qui sotto.
 			return preg_replace( '/\ssizes="[^"]*"/', ' sizes="' . $auto . $sizes . '"', $tag, 1 );
 		},
 		$html
@@ -345,7 +345,7 @@ add_filter(
 		if ( false === strpos( $tag, 'srcset=' ) ) {
 			return $tag;
 		}
-		$auto = preg_match( '/sizes="auto,/', $tag ) ? 'auto, ' : '';
+		$auto = ''; // niente "auto": altrimenti il browser ignora le misure qui sotto.
 		return preg_replace( '/\ssizes="[^"]*"/', ' sizes="' . $auto . $m[1] . '"', $tag, 1 );
 	},
 	20
@@ -639,3 +639,6 @@ add_filter(
 	},
 	99
 );
+
+/* "sizes=auto" fa usare al browser la larghezza a schermo e ignora le misure impostate dal tema: lo togliamo. */
+add_filter( 'wp_img_tag_add_auto_sizes', '__return_false' );
