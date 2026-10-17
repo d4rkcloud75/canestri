@@ -4,12 +4,12 @@ Theme URI: https://canestriautonoleggi.com/
 Author: Carmelo Brischetto
 Description: Tema figlio a blocchi di Twenty Twenty-Five per Canestri Autonoleggi.
 Template: twentytwentyfive
-Version: 0.14.1
+Version: 0.14.2
 Requires at least: 6.7
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 Text Domain: canestri
-GitHub Theme URI: d4rkcloud75/canestri-theme
+GitHub Theme URI: d4rkcloud75/canestri
 Primary Branch: main
 */
 .canestri-topbar a{color:inherit;text-decoration:none}
