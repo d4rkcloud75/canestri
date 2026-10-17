@@ -4,7 +4,7 @@ Theme URI: https://canestriautonoleggi.com/
 Author: Carmelo Brischetto
 Description: Tema figlio a blocchi di Twenty Twenty-Five per Canestri Autonoleggi.
 Template: twentytwentyfive
-Version: 0.14.10
+Version: 0.14.11
 Requires at least: 6.7
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
@@ -73,6 +73,7 @@ Primary Branch: main
 
 /* Scheda auto */
 .canestri-eyebrow{margin:0;color:var(--wp--preset--color--accent);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+/*@product*/
 .canestri-specs{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #e6e6e6}
 .canestri-spec{padding:12px 0;border-bottom:1px solid #e6e6e6}
 .canestri-spec:nth-child(odd){padding-right:14px}
@@ -86,6 +87,7 @@ Primary Branch: main
 @media (min-width:782px){.canestri-product-summary{position:sticky;top:150px;align-self:flex-start}}
 .canestri-product .woocommerce-product-gallery img{border-radius:8px}
 .canestri-product-desc h2{margin-bottom:16px}
+/*@end*/
 
 /* Griglie: una colonna su mobile */
 @media (max-width:600px){
@@ -105,6 +107,7 @@ Primary Branch: main
 .canestri-card-value a:hover{color:var(--wp--preset--color--accent)}
 .canestri-card-email{font-size:.9rem;word-break:break-all}
 .canestri-card-wide p+p{margin-top:8px}
+/*@contact*/
 .canestri-contact-form .wpcf7-form label{display:block;font-size:.85rem;font-weight:700;color:var(--wp--preset--color--contrast)}
 .canestri-contact-form .wpcf7-form p{margin:0 0 16px}
 .canestri-contact-form input[type=text],.canestri-contact-form input[type=email],.canestri-contact-form input[type=tel],.canestri-contact-form input[type=date],.canestri-contact-form textarea,.canestri-contact-form select{width:100%;box-sizing:border-box;margin-top:6px;padding:12px 14px;border:1px solid #d9d9d9;border-radius:6px;background:#fff;font:inherit;color:inherit}
@@ -115,6 +118,8 @@ Primary Branch: main
 .canestri-contact-form .wpcf7-form p:has(input[name*="prodott"]){display:none}
 @media (max-width:781px){.canestri-contact-cards{grid-template-columns:1fr 1fr!important}}
 @media (max-width:420px){.canestri-contact-cards{grid-template-columns:1fr!important}}
+/*@end*/
+/*@elementor*/
 /* Blocco Elementor "Le migliori auto a noleggio a Roma" (pagine citta) */
 .elementor-5568{background:var(--wp--preset--color--base-2);border-radius:10px;padding:32px;margin:48px 0}
 .elementor-5568 .elementor-container{align-items:center;gap:32px}
@@ -124,18 +129,23 @@ Primary Branch: main
 .elementor-5568 .elementor-widget-spacer{display:none}
 .elementor-5568 .elementor-column:last-child .elementor-widget-wrap{justify-content:center}
 @media (max-width:781px){.elementor-5568{padding:20px}}
+/*@end*/
 /* Home: contenuto Elementor a tutta larghezza */
 
 /* Home: contenuto Elementor a tutta larghezza (sezioni "allungate" senza calcoli JS) */
 .canestri-front,.canestri-front .wp-block-post-content{max-width:none!important;width:100%;margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}
 .canestri-front .wp-block-post-content>*{max-width:none!important;margin-left:0!important;margin-right:0!important}
+/*@elementor*/
 .canestri-front .elementor-section-stretched,.canestri-front .e-con.e-con-full,.canestri-front .elementor-section.elementor-section-full_width{left:0!important;width:100%!important;max-width:100%!important}
 .canestri-front .elementor-section-boxed>.elementor-container{max-width:1200px}
+/*@end*/
 
 /* Nessuno spazio tra contenuto e footer */
 .wp-site-blocks>footer.wp-block-template-part,.wp-site-blocks>main+footer{margin-block-start:0!important}
 .canestri-front{margin-block-end:0!important}
+/*@elementor*/
 .canestri-front .wp-block-post-content>.elementor>:last-child,.canestri-front .elementor>.elementor-section:last-child,.canestri-front .elementor>.e-con:last-child{margin-bottom:0!important}
+/*@end*/
 /* Pulsanti blu anche nei contenuti Elementor e nei moduli */
 .canestri-front .elementor-button,.wp-block-post-content .elementor-button,.wpcf7-submit,.canestri-cta-buttons .wp-block-button:not(.is-style-outline) .wp-block-button__link{background-color:var(--wp--preset--color--accent-2)!important;color:#fff!important;border-color:var(--wp--preset--color--accent-2)!important}
 .canestri-front .elementor-button:hover,.wp-block-post-content .elementor-button:hover,.wpcf7-submit:hover,.canestri-cta-buttons .wp-block-button:not(.is-style-outline) .wp-block-button__link:hover{background-color:var(--wp--preset--color--accent-3)!important;border-color:var(--wp--preset--color--accent-3)!important}
@@ -151,6 +161,7 @@ Primary Branch: main
  .canestri-topbar p{font-size:.75rem!important;line-height:1.3;margin:0}
  .canestri-header{padding-top:8px!important;padding-bottom:8px!important}
 }
+/*@elementor*/
 /* Slideshow home su mobile: auto subito visibile */
 @media (max-width:781px){
  .canestri-front .elementor-widget-slides .swiper-slide,.canestri-front .elementor-widget-slides .elementor-slides-wrapper{height:62vh!important;min-height:380px;max-height:560px}
@@ -160,6 +171,7 @@ Primary Branch: main
  .canestri-front .elementor-widget-slides .elementor-slide-description{font-size:.95rem!important;margin-bottom:14px!important}
  .canestri-front .elementor-widget-slides .elementor-slide-button{font-size:.9rem!important;padding:12px 20px!important}
 }
+/*@end*/
 
 /* Menu mobile */
 .canestri-header .wp-block-navigation__responsive-container-open svg,.canestri-header .wp-block-navigation__responsive-container-close svg{width:28px;height:28px}
@@ -180,7 +192,7 @@ Primary Branch: main
 .canestri-header .is-menu-open .wp-block-navigation__submenu-icon{display:none}
 .canestri-header .is-menu-open .wp-block-navigation-item[aria-current],.canestri-header .is-menu-open .current-menu-item>.wp-block-navigation-item__content{color:var(--wp--preset--color--accent)}
 .canestri-header .is-menu-open .wp-block-navigation__container>.wp-block-navigation-item:first-child>.wp-block-navigation-item__content{outline:none;border:0}
-.canestri-header .is-menu-open .wp-block-navigation__container::after{content:"06 9062 2821 \00B7  WhatsApp 340 837 8262";display:block;margin-top:28px;font-size:.85rem;color:#8a8a8a;font-family:var(--wp--preset--font-family--lato)}
+.canestri-header .is-menu-open .wp-block-navigation__container::after{content:"06 9062 2821 · WhatsApp 340 837 8262";display:block;margin-top:28px;font-size:.85rem;color:#8a8a8a;font-family:var(--wp--preset--font-family--lato)}
 @keyframes canestri-menu-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.canestri-header .wp-block-navigation__responsive-container.is-menu-open{animation:none}}
 
@@ -192,11 +204,13 @@ Primary Branch: main
 /* 0.9.1: header mobile senza spazio sopra (admin bar non fissa sotto 600px) */
 @media (max-width:600px){.admin-bar .wp-site-blocks>header.wp-block-template-part{top:0}}
 
+/*@elementor*/
 /* 0.9.1: slide home a tutto schermo su mobile (schermo meno header) */
 @media (max-width:767px){
  .canestri-front .elementor-widget-slides .swiper-slide,.canestri-front .elementor-widget-slides .elementor-slides-wrapper{height:calc(100svh - 112px)!important;min-height:440px;max-height:none!important}
  .canestri-front .elementor-widget-slides .swiper-slide-inner{padding-top:40px!important}
 }
+/*@end*/
 
 /* 0.9.1: menu mobile compatto con foto, tutto in una schermata */
 .canestri-header .is-menu-open .wp-block-navigation__responsive-close{padding:12px 20px 16px!important}
@@ -446,26 +460,32 @@ html{scroll-behavior:smooth}
 @media (max-width:360px){.canestri-header .canestri-logo img{width:100px!important}.canestri-header-cta .wp-block-button__link{padding:7px 9px!important;font-size:.68rem!important}}
 
 /* 0.14.1: pagina FAQ */
+/*@faq*/
 .canestri-faq-page .canestri-page-head{padding:clamp(40px,6vw,72px) var(--wp--preset--spacing--30)!important;margin:0}
 .canestri-faq-page .canestri-page-head .canestri-limo-h1{font-size:clamp(1.6rem,3.4vw,2.6rem)!important;max-width:none}
 .canestri-faq-page .canestri-kicker{color:var(--wp--preset--color--dark)}
 .canestri-faq-sec .canestri-limo-h2{font-size:clamp(1.2rem,2.2vw,1.6rem)!important;margin:40px 0 16px!important}
 .canestri-faq-sec>.canestri-limo-h2:first-child{margin-top:0!important}
 .canestri-faq-sec .canestri-faq{background:var(--wp--preset--color--base-2)}
+/*@end*/
 .canestri-faq summary{list-style:none;position:relative;padding-right:28px}
 .canestri-faq summary::-webkit-details-marker{display:none}
 .canestri-faq summary::after{content:"+";position:absolute;right:0;top:-2px;font-size:1.4rem;color:var(--wp--preset--color--accent);transition:transform .2s}
 .canestri-faq[open] summary::after{transform:rotate(45deg)}
 .canestri-faq-cta{margin-top:40px!important}
 
+/*@faq*/
 /* 0.14.3: pagina FAQ boxata */
 main.canestri-faq-page{max-width:1100px;margin:32px auto 72px!important;padding:0 var(--wp--preset--spacing--30)!important;box-sizing:border-box}
 .canestri-faq-page .canestri-page-head{border-radius:12px;padding:clamp(28px,4vw,48px) clamp(20px,4vw,48px)!important}
 .canestri-faq-page .canestri-page-head>*{max-width:860px!important;margin-left:0!important}
 .canestri-faq-page .canestri-faq-sec{padding:40px 0 0!important}
 .canestri-faq-page .canestri-faq-sec>*{max-width:860px!important;margin-left:0!important}
+/*@end*/
 
+/*@product*/
 /* 0.14.4: galleria prodotto visibile subito, anche se Velox rimanda gli script */
 .woocommerce-product-gallery{opacity:1!important}
 .woocommerce-product-gallery:not(:has(.flex-viewport)) .woocommerce-product-gallery__image:not(:first-child){display:none}
 .woocommerce-product-gallery:not(:has(.flex-viewport)) .woocommerce-product-gallery__image:first-child img{width:100%;height:auto;border-radius:8px}
+/*@end*/

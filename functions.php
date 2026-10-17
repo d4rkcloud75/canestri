@@ -316,6 +316,48 @@ add_action(
 add_filter( 'wp_omit_loading_attr_threshold', function () { return 1; } );
 
 /** Dimensioni corrette per le immagini dei riquadri categoria, così il telefono scarica file piccoli. */
+/**
+ * Foto della dimensione giusta: l'attributo sizes dice al browser quanto è larga davvero
+ * l'immagine, così da telefono scarica la versione piccola e non quella da 1024 px.
+ */
+function canestri_set_sizes( $html, $sizes ) {
+	return preg_replace_callback(
+		'/<img\b[^>]*>/i',
+		function ( $m ) use ( $sizes ) {
+			$tag = $m[0];
+			if ( false === strpos( $tag, 'srcset=' ) ) {
+				return $tag;
+			}
+			$auto = preg_match( '/sizes="auto,/', $tag ) ? 'auto, ' : '';
+			return preg_replace( '/\ssizes="[^"]*"/', ' sizes="' . $auto . $sizes . '"', $tag, 1 );
+		},
+		$html
+	);
+}
+add_filter(
+	'render_block',
+	function ( $html, $block ) {
+		if ( is_admin() || empty( $block['blockName'] ) ) {
+			return $html;
+		}
+		$class = isset( $block['attrs']['className'] ) ? (string) $block['attrs']['className'] : '';
+		switch ( $block['blockName'] ) {
+			case 'woocommerce/product-template':
+			case 'core/post-template':
+				return canestri_set_sizes( $html, '(max-width: 600px) 88vw, (max-width: 781px) 45vw, 390px' );
+			case 'core/gallery':
+				return canestri_set_sizes( $html, '(max-width: 781px) 46vw, 300px' );
+			case 'core/group':
+				if ( false !== strpos( $class, 'canestri-about-sec' ) ) {
+					return canestri_set_sizes( $html, '(max-width: 781px) 92vw, 520px' );
+				}
+				break;
+		}
+		return $html;
+	},
+	20,
+	2
+);
 add_filter(
 	'render_block_core/cover',
 	function ( $html, $block ) {
@@ -326,6 +368,9 @@ add_filter(
 			if ( $srcset ) {
 				$html = preg_replace( '/<img /', '<img srcset="' . esc_attr( $srcset ) . '" sizes="(max-width: 781px) 50vw, 300px" ', $html, 1 );
 			}
+		}
+		if ( false !== strpos( $class, 'canestri-occ' ) ) {
+			$html = canestri_set_sizes( $html, '(max-width: 781px) 46vw, 390px' );
 		}
 		return $html;
 	},
@@ -416,6 +461,41 @@ add_filter(
 );
 
 /**
+ * CSS del tema in linea, compresso e con le sole sezioni utili alla pagina:
+ * i blocchi segnati con un marcatore nel foglio di stile (prodotto, contatti, Elementor, FAQ)
+ * vengono scritti solo dove servono.
+ */
+function canestri_page_css( $file ) {
+	$id   = get_queried_object_id();
+	$keep = array(
+		'product'   => is_singular( 'product' ),
+		'contact'   => is_page( 'contact' ) || is_page( 'contatti' ) || ( $id && 'page-contact' === get_page_template_slug( $id ) ),
+		'elementor' => is_singular( 'product' ) || ( is_singular() && ! is_front_page() && ! canestri_slug_template() && canestri_is_elementor_page( $id ) ),
+		'faq'       => is_page( 'faq' ),
+	);
+	$key = 'canestri_css_' . md5( filemtime( $file ) . wp_json_encode( $keep ) );
+	$css = get_transient( $key );
+	if ( false !== $css ) {
+		return $css;
+	}
+	$css = (string) file_get_contents( $file );
+	$css = preg_replace_callback(
+		'#/\*@(\w+)\*/(.*?)/\*@end\*/#s',
+		function ( $m ) use ( $keep ) {
+			return ! empty( $keep[ $m[1] ] ) ? $m[2] : '';
+		},
+		$css
+	);
+	$css = preg_replace( '#/\*.*?\*/#s', '', $css );
+	$css = preg_replace( '/\s+/', ' ', $css );
+	$css = preg_replace( '/\s*([{};,>])\s*/', '$1', $css );
+	$css = str_replace( ';}', '}', $css );
+	$css = trim( $css );
+	set_transient( $key, $css, WEEK_IN_SECONDS );
+	return $css;
+}
+
+/**
  * Prestazioni: meno file che bloccano la prima visualizzazione.
  * - gli stili dei blocchi e il foglio di stile del tema vengono scritti dentro la pagina invece che caricati a parte;
  * - jQuery Migrate (serve solo a vecchi plugin) non viene caricato sul sito pubblico.
@@ -428,7 +508,7 @@ add_action(
 			wp_dequeue_style( 'canestri-style' );
 			wp_register_style( 'canestri-inline', false, array(), null );
 			wp_enqueue_style( 'canestri-inline' );
-			wp_add_inline_style( 'canestri-inline', (string) file_get_contents( $file ) );
+			wp_add_inline_style( 'canestri-inline', canestri_page_css( $file ) );
 		}
 		/* jQuery e il banner cookie in fondo alla pagina: non bloccano più la prima visualizzazione. */
 		foreach ( array( 'jquery', 'jquery-core', 'cookie-law-info' ) as $h ) {
