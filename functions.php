@@ -617,3 +617,25 @@ add_filter(
 	20,
 	3
 );
+
+/**
+ * WooCommerce scrive nella pagina tutti i dati dei prodotti mostrati (gallerie, attributi,
+ * descrizioni: circa 80 KB in home) anche se le nostre schede non li usano.
+ * Teniamo solo i campi essenziali, così l'HTML è molto più leggero da leggere sul telefono.
+ */
+add_filter(
+	'script_module_data_@wordpress/interactivity',
+	function ( $data ) {
+		if ( is_admin() || empty( $data['state']['woocommerce/products']['products'] ) || ! is_array( $data['state']['woocommerce/products']['products'] ) ) {
+			return $data;
+		}
+		$keep = array( 'id', 'name', 'slug', 'parent', 'type', 'permalink', 'is_purchasable', 'is_in_stock', 'has_options' );
+		foreach ( $data['state']['woocommerce/products']['products'] as $pid => $product ) {
+			if ( is_array( $product ) ) {
+				$data['state']['woocommerce/products']['products'][ $pid ] = array_intersect_key( $product, array_flip( $keep ) );
+			}
+		}
+		return $data;
+	},
+	99
+);
