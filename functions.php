@@ -424,7 +424,17 @@ add_filter( 'styles_inline_size_limit', function () { return 120000; } );
 add_action(
 	'wp_enqueue_scripts',
 	function () {
-		wp_style_add_data( 'canestri-style', 'path', get_stylesheet_directory() . '/style.css' );
+		$file = get_stylesheet_directory() . '/style.css';
+		if ( is_readable( $file ) ) {
+			wp_dequeue_style( 'canestri-style' );
+			wp_register_style( 'canestri-inline', false, array(), null );
+			wp_enqueue_style( 'canestri-inline' );
+			wp_add_inline_style( 'canestri-inline', (string) file_get_contents( $file ) );
+		}
+		/* jQuery e il banner cookie in fondo alla pagina: non bloccano più la prima visualizzazione. */
+		foreach ( array( 'jquery', 'jquery-core', 'cookie-law-info' ) as $h ) {
+			wp_script_add_data( $h, 'group', 1 );
+		}
 	},
 	20
 );
