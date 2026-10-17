@@ -1,0 +1,35 @@
+<!-- wp:template-part {"slug":"header","area":"header"} /-->
+
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"40px","bottom":"64px"}}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<main class="wp-block-group" style="padding-top:40px;padding-bottom:64px"><!-- wp:woocommerce/breadcrumbs {"fontSize":"small"} /-->
+
+<!-- wp:query-title {"type":"archive","showPrefix":false,"style":{"spacing":{"margin":{"bottom":"12px"}}}} /-->
+
+<!-- wp:term-description /-->
+
+<!-- wp:woocommerce/product-collection {"queryId":71,"query":{"perPage":12,"pages":0,"offset":0,"postType":"product","order":"asc","orderBy":"title","search":"","exclude":[],"inherit":true,"taxQuery":{},"isProductCollectionBlock":true,"featured":false,"woocommerceOnSale":false,"woocommerceStockStatus":["instock","outofstock","onbackorder"],"woocommerceAttributes":[],"woocommerceHandPickedProducts":[]},"tagName":"div","displayLayout":{"type":"flex","columns":3,"shrinkColumns":true},"collection":"woocommerce/product-collection/product-catalog","className":"canestri-grid"} -->
+<div class="wp-block-woocommerce-product-collection canestri-grid"><!-- wp:woocommerce/product-template -->
+<!-- wp:woocommerce/product-image {"showSaleBadge":false,"imageSizing":"single","isDescendentOfQueryLoop":true,"aspectRatio":"4/3","scale":"cover"} /-->
+
+<!-- wp:post-title {"textAlign":"left","level":2,"isLink":true,"style":{"typography":{"fontSize":"1.1rem","fontWeight":"700","textTransform":"uppercase"},"spacing":{"margin":{"top":"14px","bottom":"6px"}}},"__woocommerceNamespace":"woocommerce/product-collection/product-title"} /-->
+
+<!-- wp:read-more {"content":"Scopri l'auto e chiedi un preventivo","style":{"typography":{"fontSize":"0.85rem"}}} /-->
+<!-- /wp:woocommerce/product-template -->
+
+<!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"}} -->
+<!-- wp:query-pagination-previous /-->
+
+<!-- wp:query-pagination-numbers /-->
+
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination -->
+
+<!-- wp:woocommerce/product-collection-no-results -->
+<!-- wp:paragraph -->
+<p>Nessuna auto in questa categoria. <a href="/contact/">Contattaci</a> per un preventivo su misura.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:woocommerce/product-collection-no-results --></div>
+<!-- /wp:woocommerce/product-collection --></main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","area":"footer"} /-->

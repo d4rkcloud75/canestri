@@ -1,0 +1,446 @@
+/*
+Theme Name: Canestri
+Theme URI: https://canestriautonoleggi.com/
+Author: Carmelo Brischetto
+Description: Tema figlio a blocchi di Twenty Twenty-Five per Canestri Autonoleggi.
+Template: twentytwentyfive
+Version: 0.14.0
+Requires at least: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+Text Domain: canestri
+GitHub Theme URI: d4rkcloud75/canestri-theme
+Primary Branch: main
+*/
+.canestri-topbar a{color:inherit;text-decoration:none}
+.canestri-header .wp-block-navigation a{text-decoration:none}
+.canestri-header .wp-block-navigation-item__content:hover{color:var(--wp--preset--color--accent)}
+.canestri-footer ul{list-style:none;margin:0}
+.canestri-footer li{margin-bottom:.4em}
+.canestri-footer a{text-decoration:none}
+.canestri-footer a:hover{text-decoration:underline}
+@media (max-width:781px){.canestri-topbar p{font-size:.8rem}.canestri-header-cta .wp-block-button__link{padding:7px 11px!important;font-size:.72rem!important;line-height:1.1;white-space:nowrap}.canestri-header .canestri-logo img{width:112px!important}.canestri-scrolled .canestri-header .canestri-logo img{width:96px!important}}
+.canestri-sidebar .wp-block-post-title a{text-decoration:none;color:var(--wp--preset--color--contrast)}
+.canestri-sidebar .wp-block-post-title a:hover{color:var(--wp--preset--color--accent)}
+.canestri-sidebar .wp-block-post-featured-image img{border-radius:4px}
+@media (min-width:782px){.canestri-sidebar{position:sticky;top:110px}}
+.wp-block-post-content .wp-block-gallery{margin-bottom:2rem}
+
+/* Header fisso */
+.wp-site-blocks>header.wp-block-template-part{position:sticky;top:0;z-index:100;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.admin-bar .wp-site-blocks>header.wp-block-template-part{top:32px}
+@media (max-width:782px){.admin-bar .wp-site-blocks>header.wp-block-template-part{top:46px}}
+@media (min-width:782px){.canestri-sidebar{top:150px}}
+/* Mega menu */
+.canestri-mega-s{display:block;font-size:.78rem;color:var(--wp--preset--color--contrast-2);font-weight:400}
+.canestri-mega-t{display:block;font-weight:600}
+@media (min-width:600px){
+ .canestri-header .canestri-mega{position:static}
+ .canestri-header .canestri-mega>.wp-block-navigation__submenu-container{display:grid!important;grid-template-columns:repeat(4,1fr);gap:20px;width:min(920px,92vw)!important;padding:22px!important;left:50%!important;right:auto!important;transform:translateX(-50%);border:0!important;border-radius:0 0 8px 8px;box-shadow:0 18px 40px rgba(0,0,0,.12);top:100%}
+ .canestri-header .canestri-mega-item>.wp-block-navigation-item__content{display:block!important;padding:0!important;white-space:normal}
+ .canestri-header .canestri-mega-item img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:6px;margin-bottom:10px;transition:transform .25s ease}
+ .canestri-header .canestri-mega-item:hover img{transform:scale(1.03)}
+ .canestri-header .wp-block-navigation__container>.wp-block-navigation-item{position:relative}
+ .canestri-header .wp-block-navigation__container>.canestri-mega{position:static}
+ .canestri-header>.wp-block-group{position:relative}
+}
+@media (max-width:599px){.canestri-mega-item img,.canestri-mega-s{display:none!important}}
+
+/* Header: compattazione morbida allo scorrimento */
+.wp-site-blocks>header.wp-block-template-part{transition:box-shadow .35s ease,background-color .35s ease}
+.canestri-topbar{max-height:60px;overflow:hidden;transition:max-height .35s ease,padding .35s ease,opacity .25s ease}
+.canestri-header{transition:padding .35s ease}
+.canestri-header .canestri-logo img{transition:width .35s ease}
+.canestri-scrolled .wp-site-blocks>header.wp-block-template-part{box-shadow:0 8px 24px rgba(0,0,0,.08);animation:canestri-drop .4s ease}
+.canestri-scrolled .canestri-topbar{max-height:0;padding-top:0!important;padding-bottom:0!important;opacity:0}
+.canestri-scrolled .canestri-header{padding-top:8px!important;padding-bottom:8px!important}
+.canestri-scrolled .canestri-header .canestri-logo img{width:108px!important}
+@keyframes canestri-drop{from{transform:translateY(-14px)}to{transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){
+ .wp-site-blocks>header.wp-block-template-part,.canestri-topbar,.canestri-header,.canestri-header .canestri-logo img{transition:none}
+ .canestri-scrolled .wp-site-blocks>header.wp-block-template-part{animation:none}
+}
+
+/* Griglie shop e blog */
+.canestri-grid .wc-block-product-template,.canestri-grid .wp-block-post-template{gap:36px 28px}
+@media (min-width:782px){.canestri-grid .wc-block-product-template{grid-template-columns:repeat(3,minmax(0,1fr))!important;display:grid!important}}
+.canestri-grid img{width:100%;height:auto;border-radius:6px;image-rendering:auto}
+.canestri-grid .wp-block-post-title a{text-decoration:none;color:var(--wp--preset--color--contrast)}
+.canestri-grid .wp-block-post-title a:hover{color:var(--wp--preset--color--accent)}
+.canestri-grid .wc-block-components-product-image a{display:block;overflow:hidden;border-radius:6px}
+.canestri-grid .wc-block-components-product-image img{transition:transform .35s ease}
+.canestri-grid li:hover .wc-block-components-product-image img{transform:scale(1.03)}
+
+/* Scheda auto */
+.canestri-eyebrow{margin:0;color:var(--wp--preset--color--accent);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.canestri-specs{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #e6e6e6}
+.canestri-spec{padding:12px 0;border-bottom:1px solid #e6e6e6}
+.canestri-spec:nth-child(odd){padding-right:14px}
+.canestri-specs dt{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:#8a8a8a;margin:0 0 2px}
+.canestri-specs dd{margin:0;font-weight:700;color:var(--wp--preset--color--contrast)}
+.canestri-cta-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.canestri-cta-buttons .wp-block-button{flex:1 1 180px}
+.canestri-cta-buttons .wp-block-button__link{display:block;text-align:center;width:100%}
+.canestri-cta-buttons .is-style-outline .wp-block-button__link{background:transparent;color:var(--wp--preset--color--contrast);border:1px solid var(--wp--preset--color--contrast)}
+.canestri-cta-link{font-size:.85rem;margin:12px 0 0}
+@media (min-width:782px){.canestri-product-summary{position:sticky;top:150px;align-self:flex-start}}
+.canestri-product .woocommerce-product-gallery img{border-radius:8px}
+.canestri-product-desc h2{margin-bottom:16px}
+
+/* Griglie: una colonna su mobile */
+@media (max-width:600px){
+ .canestri-grid .wc-block-product-template,.canestri-grid .wp-block-post-template{grid-template-columns:1fr!important;display:grid!important}
+ .canestri-grid .wc-block-product-template>li{width:100%!important;max-width:100%!important}
+}
+@media (min-width:601px) and (max-width:781px){
+ .canestri-grid .wc-block-product-template,.canestri-grid .wp-block-post-template{grid-template-columns:repeat(2,minmax(0,1fr))!important;display:grid!important}
+}
+/* Contatti */
+.canestri-contact-cards{gap:16px!important}
+.canestri-card{background:#fff;border:1px solid #ececec;border-radius:10px;padding:18px 20px}
+.canestri-card p{margin:0}
+.canestri-card-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:#8a8a8a;margin-bottom:4px!important}
+.canestri-card-value{font-weight:700;color:var(--wp--preset--color--contrast);font-size:1.05rem}
+.canestri-card-value a{color:inherit;text-decoration:none}
+.canestri-card-value a:hover{color:var(--wp--preset--color--accent)}
+.canestri-card-email{font-size:.9rem;word-break:break-all}
+.canestri-card-wide p+p{margin-top:8px}
+.canestri-contact-form .wpcf7-form label{display:block;font-size:.85rem;font-weight:700;color:var(--wp--preset--color--contrast)}
+.canestri-contact-form .wpcf7-form p{margin:0 0 16px}
+.canestri-contact-form input[type=text],.canestri-contact-form input[type=email],.canestri-contact-form input[type=tel],.canestri-contact-form input[type=date],.canestri-contact-form textarea,.canestri-contact-form select{width:100%;box-sizing:border-box;margin-top:6px;padding:12px 14px;border:1px solid #d9d9d9;border-radius:6px;background:#fff;font:inherit;color:inherit}
+.canestri-contact-form textarea{min-height:140px}
+.canestri-contact-form input:focus,.canestri-contact-form textarea:focus{outline:2px solid var(--wp--preset--color--accent-2);outline-offset:1px;border-color:transparent}
+.canestri-contact-form input[type=submit]{background:var(--wp--preset--color--accent-2);color:#fff;border:0;border-radius:4px;padding:13px 28px;font-family:var(--wp--preset--font-family--poppins);font-weight:500;cursor:pointer}
+.canestri-contact-form input[type=submit]:hover{background:var(--wp--preset--color--accent-3)}
+.canestri-contact-form .wpcf7-form p:has(input[name*="prodott"]){display:none}
+@media (max-width:781px){.canestri-contact-cards{grid-template-columns:1fr 1fr!important}}
+@media (max-width:420px){.canestri-contact-cards{grid-template-columns:1fr!important}}
+/* Blocco Elementor "Le migliori auto a noleggio a Roma" (pagine citta) */
+.elementor-5568{background:var(--wp--preset--color--base-2);border-radius:10px;padding:32px;margin:48px 0}
+.elementor-5568 .elementor-container{align-items:center;gap:32px}
+.elementor-5568 img{border-radius:8px;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.elementor-5568 .elementor-heading-title{font-size:1.6rem!important;font-weight:900!important;text-transform:uppercase;color:var(--wp--preset--color--contrast)!important;line-height:1.2}
+.elementor-5568 .elementor-widget-text-editor{font-size:1rem}
+.elementor-5568 .elementor-widget-spacer{display:none}
+.elementor-5568 .elementor-column:last-child .elementor-widget-wrap{justify-content:center}
+@media (max-width:781px){.elementor-5568{padding:20px}}
+/* Home: contenuto Elementor a tutta larghezza */
+
+/* Home: contenuto Elementor a tutta larghezza (sezioni "allungate" senza calcoli JS) */
+.canestri-front,.canestri-front .wp-block-post-content{max-width:none!important;width:100%;margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}
+.canestri-front .wp-block-post-content>*{max-width:none!important;margin-left:0!important;margin-right:0!important}
+.canestri-front .elementor-section-stretched,.canestri-front .e-con.e-con-full,.canestri-front .elementor-section.elementor-section-full_width{left:0!important;width:100%!important;max-width:100%!important}
+.canestri-front .elementor-section-boxed>.elementor-container{max-width:1200px}
+
+/* Nessuno spazio tra contenuto e footer */
+.wp-site-blocks>footer.wp-block-template-part,.wp-site-blocks>main+footer{margin-block-start:0!important}
+.canestri-front{margin-block-end:0!important}
+.canestri-front .wp-block-post-content>.elementor>:last-child,.canestri-front .elementor>.elementor-section:last-child,.canestri-front .elementor>.e-con:last-child{margin-bottom:0!important}
+/* Pulsanti blu anche nei contenuti Elementor e nei moduli */
+.canestri-front .elementor-button,.wp-block-post-content .elementor-button,.wpcf7-submit,.canestri-cta-buttons .wp-block-button:not(.is-style-outline) .wp-block-button__link{background-color:var(--wp--preset--color--accent-2)!important;color:#fff!important;border-color:var(--wp--preset--color--accent-2)!important}
+.canestri-front .elementor-button:hover,.wp-block-post-content .elementor-button:hover,.wpcf7-submit:hover,.canestri-cta-buttons .wp-block-button:not(.is-style-outline) .wp-block-button__link:hover{background-color:var(--wp--preset--color--accent-3)!important;border-color:var(--wp--preset--color--accent-3)!important}
+
+/* Pulsante header rosso */
+.canestri-header-cta .wp-block-button__link{background-color:var(--wp--preset--color--accent)!important;color:#fff!important}
+.canestri-header-cta .wp-block-button__link:hover{background-color:var(--wp--preset--color--dark)!important}
+/* Barra superiore compatta su mobile: una sola riga */
+@media (max-width:781px){
+ .canestri-topbar{padding-top:4px!important;padding-bottom:4px!important}
+ .canestri-topbar .canestri-topbar-secondary{display:none}
+ .canestri-topbar>.wp-block-group{justify-content:center!important}
+ .canestri-topbar p{font-size:.75rem!important;line-height:1.3;margin:0}
+ .canestri-header{padding-top:8px!important;padding-bottom:8px!important}
+}
+/* Slideshow home su mobile: auto subito visibile */
+@media (max-width:781px){
+ .canestri-front .elementor-widget-slides .swiper-slide,.canestri-front .elementor-widget-slides .elementor-slides-wrapper{height:62vh!important;min-height:380px;max-height:560px}
+ .canestri-front .elementor-widget-slides .swiper-slide-bg{background-position:65% 78%!important;background-size:cover!important}
+ .canestri-front .elementor-widget-slides .swiper-slide-inner{justify-content:flex-start!important;align-items:flex-start!important;padding-top:28px!important}
+ .canestri-front .elementor-widget-slides .elementor-slide-heading{font-size:1.6rem!important}
+ .canestri-front .elementor-widget-slides .elementor-slide-description{font-size:.95rem!important;margin-bottom:14px!important}
+ .canestri-front .elementor-widget-slides .elementor-slide-button{font-size:.9rem!important;padding:12px 20px!important}
+}
+
+/* Menu mobile */
+.canestri-header .wp-block-navigation__responsive-container-open svg,.canestri-header .wp-block-navigation__responsive-container-close svg{width:28px;height:28px}
+.canestri-header .wp-block-navigation__responsive-container.is-menu-open{padding:0!important;background:#fff!important;animation:canestri-menu-in .28s ease}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-close{max-width:none;padding:18px 24px 32px}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-container-close{top:18px;right:20px}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-dialog{margin-top:0!important}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-container-content{padding-top:64px!important;align-items:stretch!important;gap:0!important}
+.canestri-header .is-menu-open .wp-block-navigation__container{width:100%;align-items:stretch!important;gap:0!important;font-family:var(--wp--preset--font-family--poppins)}
+.canestri-header .is-menu-open .wp-block-navigation__container>.wp-block-navigation-item{width:100%;border-bottom:1px solid #eeeeee;padding:0!important;align-items:flex-start!important}
+.canestri-header .is-menu-open .wp-block-navigation__container>.wp-block-navigation-item>.wp-block-navigation-item__content{display:block;width:100%;padding:16px 0!important;font-size:1.15rem;font-weight:500;color:var(--wp--preset--color--dark);text-align:left}
+.canestri-header .is-menu-open .wp-block-navigation__container>.wp-block-navigation-item>.wp-block-navigation-item__content:focus{outline:none}
+.canestri-header .is-menu-open .wp-block-navigation-item.has-child>.wp-block-navigation-item__content{font-size:.72rem!important;font-weight:600!important;letter-spacing:1.5px;text-transform:uppercase;color:var(--wp--preset--color--accent)!important;padding:18px 0 6px!important}
+.canestri-header .is-menu-open .wp-block-navigation__submenu-container{width:100%;padding:0 0 14px!important;gap:0!important;display:grid!important;grid-template-columns:1fr 1fr;column-gap:16px!important;position:static!important;transform:none!important;box-shadow:none!important;border:0!important}
+.canestri-header .is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation-item__content{padding:9px 0!important;font-size:.98rem!important;font-weight:400;color:var(--wp--preset--color--contrast)!important;text-align:left}
+.canestri-header .is-menu-open .canestri-mega-t{font-weight:500}
+.canestri-header .is-menu-open .wp-block-navigation-item__content:active{color:var(--wp--preset--color--accent)!important}
+.canestri-header .is-menu-open .wp-block-navigation__submenu-icon{display:none}
+.canestri-header .is-menu-open .wp-block-navigation-item[aria-current],.canestri-header .is-menu-open .current-menu-item>.wp-block-navigation-item__content{color:var(--wp--preset--color--accent)}
+.canestri-header .is-menu-open .wp-block-navigation__container>.wp-block-navigation-item:first-child>.wp-block-navigation-item__content{outline:none;border:0}
+.canestri-header .is-menu-open .wp-block-navigation__container::after{content:"06 9062 2821 \00B7  WhatsApp 340 837 8262";display:block;margin-top:28px;font-size:.85rem;color:#8a8a8a;font-family:var(--wp--preset--font-family--lato)}
+@keyframes canestri-menu-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.canestri-header .wp-block-navigation__responsive-container.is-menu-open{animation:none}}
+
+/* Pagine Elementor larghe */
+.canestri-page-head{margin-block-end:var(--wp--preset--spacing--50)}
+.canestri-page-head .wp-block-post-title{margin:0}
+.canestri-elementor-page>.wp-block-post-content{padding-inline:var(--wp--preset--spacing--30);padding-block-end:var(--wp--preset--spacing--60)}
+
+/* 0.9.1: header mobile senza spazio sopra (admin bar non fissa sotto 600px) */
+@media (max-width:600px){.admin-bar .wp-site-blocks>header.wp-block-template-part{top:0}}
+
+/* 0.9.1: slide home a tutto schermo su mobile (schermo meno header) */
+@media (max-width:767px){
+ .canestri-front .elementor-widget-slides .swiper-slide,.canestri-front .elementor-widget-slides .elementor-slides-wrapper{height:calc(100svh - 112px)!important;min-height:440px;max-height:none!important}
+ .canestri-front .elementor-widget-slides .swiper-slide-inner{padding-top:40px!important}
+}
+
+/* 0.9.1: menu mobile compatto con foto, tutto in una schermata */
+.canestri-header .is-menu-open .wp-block-navigation__responsive-close{padding:12px 20px 16px!important}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-container-close{top:14px;right:16px}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-container-content{padding-top:44px!important}
+.canestri-header .is-menu-open .wp-block-navigation__container>.wp-block-navigation-item>.wp-block-navigation-item__content{padding:11px 0!important;font-size:1.05rem}
+.canestri-header .is-menu-open .wp-block-navigation-item.has-child>.wp-block-navigation-item__content{padding:12px 0 8px!important}
+.canestri-header .is-menu-open .wp-block-navigation__submenu-container{padding:0 0 12px!important;column-gap:10px!important}
+.canestri-header .is-menu-open .canestri-mega>.wp-block-navigation__submenu-container{row-gap:10px!important}
+.canestri-header .is-menu-open .canestri-mega-item{width:100%;align-items:stretch!important;justify-content:flex-start!important}
+.canestri-header .is-menu-open .canestri-mega-item>.wp-block-navigation-item__content{display:block!important;width:100%;padding:0!important;text-align:left!important;font-size:.88rem!important;line-height:1.3}
+.canestri-header .is-menu-open .canestri-mega-item img{display:block!important;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:6px;margin:0 0 5px}
+.canestri-header .is-menu-open .canestri-mega-s{display:none!important}
+.canestri-header .is-menu-open .canestri-mega-t{display:block;font-weight:500;color:var(--wp--preset--color--dark)}
+.canestri-header .is-menu-open .canestri-city-pre{display:none}
+.canestri-header .is-menu-open .wp-block-navigation-item:has(.canestri-city-pre)>.wp-block-navigation-item__content{padding:4px 0!important}
+.canestri-header .is-menu-open .wp-block-navigation__submenu-container:has(.canestri-city-pre){grid-template-columns:repeat(3,auto);justify-content:start;column-gap:22px!important}
+.canestri-header .is-menu-open .wp-block-navigation__container::after{margin-top:16px;font-size:.8rem}
+@media (max-height:620px){.canestri-header .is-menu-open .canestri-mega-item img{aspect-ratio:2/1}}
+
+/* 0.10.0: home a blocchi */
+.canestri-home .canestri-section{padding:clamp(48px,7vw,88px) var(--wp--preset--spacing--30)}
+.canestri-home .canestri-band{margin:0}
+.canestri-eyebrow-light{font-family:var(--wp--preset--font-family--poppins);font-size:.75rem!important;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff;opacity:.85;margin:0 0 8px}
+.canestri-hero{min-height:min(88vh,760px)!important;padding-inline:var(--wp--preset--spacing--30)!important}
+.canestri-hero .wp-block-cover__inner-container{max-width:1200px}
+.canestri-hero-title{font-size:clamp(2.1rem,5.2vw,4rem)!important;font-weight:900!important;line-height:1.05;max-width:13ch;margin-top:0!important;margin-bottom:14px!important}
+.canestri-hero-sub{font-size:clamp(1rem,1.6vw,1.2rem);max-width:46ch;margin-top:0!important;margin-bottom:26px!important}
+.canestri-btn-light .wp-block-button__link{color:#fff!important;border-color:#fff!important;background:transparent!important}
+.canestri-btn-light .wp-block-button__link:hover{background:#fff!important;color:var(--wp--preset--color--dark)!important}
+.canestri-cats{gap:20px!important}
+.canestri-cat-card{overflow:hidden;padding:22px!important}
+.canestri-cat-card img{transition:transform .5s ease}
+.canestri-cat-card:hover img{transform:scale(1.05)}
+.canestri-cat-card h3{margin:0;font-size:1.35rem;text-transform:uppercase;font-weight:900}
+.canestri-cat-card h3 a{color:#fff;text-decoration:none}
+.canestri-cat-card h3 a::after{content:"";position:absolute;inset:0;z-index:2}
+.canestri-features{margin-top:clamp(40px,5vw,64px)!important;gap:32px!important}
+.canestri-feature-title{font-size:1.05rem!important;text-transform:uppercase;margin:0 0 8px;padding-top:14px;border-top:3px solid var(--wp--preset--color--accent);display:inline-block}
+.canestri-features p{font-size:.95rem;margin:0}
+.canestri-features p a{display:block;margin-top:8px;font-weight:700;color:var(--wp--preset--color--accent-2);text-decoration:none}
+.canestri-home-h1{font-size:clamp(1.5rem,2.8vw,2.3rem)!important;line-height:1.2;max-width:28ch;margin-top:0!important;margin-bottom:36px!important}
+.canestri-home h2{margin-top:0}
+.canestri-wedding{padding:clamp(56px,8vw,96px) var(--wp--preset--spacing--30)!important}
+.canestri-brands img{width:100%;height:auto;border-radius:8px}
+.canestri-about p{color:#d8d8d8}
+@media (max-width:781px){
+ .canestri-cats{grid-template-columns:1fr 1fr!important;gap:12px!important}
+ .canestri-cat-card{min-height:200px!important;padding:14px!important}
+ .canestri-cat-card h3{font-size:1rem}
+ .canestri-cat-card .canestri-eyebrow-light{display:none}
+ .canestri-features{display:grid!important;grid-template-columns:1fr 1fr;gap:24px!important}
+}
+@media (max-width:767px){
+ .canestri-hero{min-height:calc(100svh - 112px)!important;align-items:flex-start!important;padding-top:44px!important}
+}
+@media (max-width:480px){.canestri-features{grid-template-columns:1fr}}
+
+/* 0.11.0: landing limousine e limobus */
+.canestri-limo{--limo-blue:var(--wp--preset--color--accent-2);--limo-red:var(--wp--preset--color--accent)}
+.canestri-promo{max-width:1200px;margin:24px auto 0;padding:0 var(--wp--preset--spacing--30)}
+.canestri-promo img{display:block;width:100%;height:auto;border-radius:10px}
+.canestri-limo-intro{padding:clamp(32px,5vw,56px) var(--wp--preset--spacing--30) clamp(28px,4vw,44px)}
+.canestri-pill{display:inline-block;background:var(--limo-red);color:#fff;font-family:var(--wp--preset--font-family--poppins);font-size:.78rem!important;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:7px 16px;border-radius:999px;margin-top:0!important;margin-bottom:18px!important}
+.canestri-limo-h1{font-size:clamp(1.9rem,4.2vw,3.3rem)!important;font-weight:900!important;line-height:1.08;text-transform:uppercase;margin-top:0!important;margin-bottom:18px!important;max-width:22ch;color:var(--wp--preset--color--dark)}
+.canestri-lead{font-size:clamp(1.02rem,1.5vw,1.18rem);line-height:1.65;max-width:70ch;margin-top:0!important;margin-bottom:26px!important}
+.canestri-btn-wa .wp-block-button__link{background:#1e7145!important;color:#fff!important}
+.canestri-btn-wa .wp-block-button__link:hover{background:#165a36!important}
+.canestri-featbar{background:linear-gradient(90deg,#eef3fa,#f7f4ee 55%,#fdf0ee);padding:22px var(--wp--preset--spacing--30)}
+.canestri-feats{gap:22px!important}
+.canestri-feat{gap:12px!important;align-items:flex-start}
+.canestri-feat p{margin:0;font-size:.88rem;line-height:1.4;color:var(--wp--preset--color--contrast-2)}
+.canestri-feat p strong{color:var(--wp--preset--color--dark);font-size:.98rem}
+.canestri-feat-ico{font-size:1.9rem!important;line-height:1!important}
+.canestri-limo-sec{padding:clamp(52px,7vw,88px) var(--wp--preset--spacing--30)}
+.canestri-kicker{font-family:var(--wp--preset--font-family--poppins);font-size:.8rem!important;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--limo-red);margin-top:0!important;margin-bottom:6px!important}
+.canestri-limo-h2{font-size:clamp(1.6rem,3.2vw,2.5rem)!important;font-weight:900!important;line-height:1.12;text-transform:uppercase;color:var(--limo-blue);margin-top:0!important;margin-bottom:34px!important}
+.canestri-limo-h2.has-base-color{color:#fff}
+.canestri-occ-grid{gap:20px!important}
+.canestri-occ{border-radius:10px;overflow:hidden;padding:20px!important}
+.canestri-occ img{transition:transform .5s ease}
+.canestri-occ:hover img{transform:scale(1.05)}
+.canestri-occ h3{margin:0;font-size:1.12rem;font-weight:900;text-transform:uppercase}
+.canestri-occ h3 a{color:#fff;text-decoration:none}
+.canestri-occ h3 a::after{content:"";position:absolute;inset:0;z-index:2}
+.canestri-limo-why{padding-top:0}
+.canestri-why{gap:48px!important;align-items:center!important}
+.canestri-why .canestri-limo-h2{margin-bottom:18px!important}
+.canestri-rounded img{border-radius:10px;width:100%;height:auto}
+.canestri-cards2{margin-top:clamp(36px,5vw,56px)!important;gap:24px!important}
+.canestri-card-soft{background:var(--wp--preset--color--base-2);border-radius:12px;padding:28px 30px;border-top:4px solid var(--limo-red)}
+.canestri-card-soft h3{margin-top:0;font-size:1.15rem}
+.canestri-list{list-style:none;padding:0;margin:0}
+.canestri-list li{padding:9px 0;border-bottom:1px solid #e6e6e6}
+.canestri-list li:last-child{border-bottom:0}
+.canestri-steps{counter-reset:st;list-style:none;padding:0;margin:0}
+.canestri-steps li{counter-increment:st;position:relative;padding:8px 0 8px 46px;margin:4px 0}
+.canestri-steps li::before{content:counter(st);position:absolute;left:0;top:6px;width:32px;height:32px;border-radius:50%;background:var(--limo-blue);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.canestri-gallery-sec .canestri-kicker{color:#f2c94c}
+.canestri-gallery{gap:12px!important;grid-auto-rows:150px}
+.canestri-gallery figure{margin:0!important;height:100%}
+.canestri-gallery img{width:100%;height:100%!important;object-fit:cover;border-radius:8px}
+.canestri-gallery figure:nth-child(1),.canestri-gallery figure:nth-child(4){grid-row:span 2}
+.canestri-cta-band{background:linear-gradient(115deg,var(--wp--preset--color--accent) 0%,#c0261e 55%,#8f1a14 100%);padding:clamp(48px,6vw,72px) var(--wp--preset--spacing--30)}
+.canestri-cta-band h2{font-size:clamp(1.4rem,2.8vw,2.1rem)!important;font-weight:900;text-transform:uppercase;margin:0 0 12px}
+.canestri-btn-white .wp-block-button__link{background:#fff!important;color:var(--wp--preset--color--accent)!important;font-weight:600}
+.canestri-form-sec{background:#fbf6ee}
+.canestri-form-card{background:#fff;border-radius:14px;border-top:5px solid var(--limo-red);box-shadow:0 18px 50px rgba(0,0,0,.08);padding:clamp(26px,4vw,44px)!important}
+.canestri-form-card .canestri-limo-h2{font-size:clamp(1.3rem,2.4vw,1.8rem)!important;margin-bottom:8px!important}
+.canestri-form-sub{color:var(--wp--preset--color--contrast-2);margin-top:0!important;margin-bottom:24px!important}
+.canestri-form-card .wpcf7-form label{display:block;font-size:.85rem;font-weight:700;color:var(--wp--preset--color--contrast)}
+.canestri-form-card .wpcf7-form p{margin:0 0 16px}
+.canestri-form-card input[type=text],.canestri-form-card input[type=email],.canestri-form-card input[type=tel],.canestri-form-card input[type=date],.canestri-form-card textarea,.canestri-form-card select{width:100%;box-sizing:border-box;margin-top:6px;padding:12px 14px;border:1px solid #d9d9d9;border-radius:6px;background:#fff;font:inherit;color:inherit}
+.canestri-form-card textarea{min-height:130px}
+.canestri-form-card input[type=submit]{width:100%;background:var(--limo-blue);color:#fff;border:0;border-radius:6px;padding:15px 28px;font-family:var(--wp--preset--font-family--poppins);font-weight:600;font-size:1rem;cursor:pointer}
+.canestri-form-card input[type=submit]:hover{background:var(--wp--preset--color--accent-3)}
+.canestri-form-card .wpcf7-form p:has(input[name*="prodott"]){display:none}
+.canestri-stats{gap:clamp(28px,6vw,80px)!important;padding:36px var(--wp--preset--spacing--30);border-bottom:1px solid #eee}
+.canestri-stats p{margin:0;text-align:center;font-size:.85rem;color:var(--wp--preset--color--contrast-2)}
+.canestri-stats strong{display:block;font-size:2.2rem;font-weight:900;color:var(--limo-red);line-height:1.1}
+.canestri-about2{gap:52px!important}
+.canestri-about2 .canestri-limo-h2{margin-bottom:18px!important}
+.canestri-faq-sec .canestri-limo-h2{margin-bottom:26px!important}
+.canestri-faq{background:#fff;border-radius:10px;padding:18px 22px;margin-top:0!important;margin-bottom:12px!important;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.canestri-faq summary{font-weight:700;cursor:pointer;color:var(--wp--preset--color--dark)}
+.canestri-faq p{margin:12px 0 0}
+.canestri-stickybar{position:fixed;left:0;right:0;bottom:0;z-index:90;background:#fff;box-shadow:0 -6px 24px rgba(0,0,0,.08);padding:10px max(16px,calc((100vw - 1200px)/2))!important;align-items:center!important}
+.canestri-stickybar p{margin:0;font-size:.95rem}
+.canestri-stickybar .wp-block-buttons{gap:8px!important;flex-wrap:nowrap!important}
+.canestri-stickybar .wp-block-button__link{padding:10px 18px!important;font-size:.9rem!important;white-space:nowrap}
+body:has(.canestri-stickybar){padding-bottom:64px}
+body:has(.canestri-stickybar) .chaty-widget,body:has(.canestri-stickybar) #chaty-widget-0{bottom:76px!important}
+@media (max-width:781px){
+ .canestri-feats{grid-template-columns:1fr 1fr!important}
+ .canestri-occ-grid{grid-template-columns:1fr 1fr!important;gap:12px!important}
+ .canestri-occ{min-height:170px!important;padding:14px!important}
+ .canestri-occ h3{font-size:.9rem}
+ .canestri-gallery{grid-template-columns:1fr 1fr!important;grid-auto-rows:120px}
+ .canestri-stickybar>p{display:none}
+ .canestri-stickybar{justify-content:center!important}
+ .canestri-stickybar .wp-block-buttons{width:100%;justify-content:stretch!important}
+ .canestri-stickybar .wp-block-button{flex:1}
+ .canestri-stickybar .wp-block-button__link{width:100%;text-align:center}
+}
+@media (max-width:480px){.canestri-feats{grid-template-columns:1fr!important}}
+
+/* 0.12.0: home con il corpo della bozza */
+.canestri-home .canestri-band .canestri-eyebrow{color:var(--wp--preset--color--accent)}
+.canestri-home .canestri-home-h1{color:var(--wp--preset--color--accent-2);text-transform:uppercase;font-weight:900!important}
+.canestri-home .canestri-about-sec{background:#fff}
+
+/* 0.12.1: hero centrato nel contenitore, auto spostata a destra e più scura */
+.canestri-hero .wp-block-cover__inner-container{width:100%!important;max-width:1200px!important;margin-inline:auto!important}
+.canestri-hero .wp-block-cover__inner-container>*{margin-left:0!important;margin-right:0!important}
+.canestri-hero .wp-block-cover__background{opacity:1!important;background:linear-gradient(90deg,rgba(10,10,10,.82) 0%,rgba(10,10,10,.6) 40%,rgba(10,10,10,.25) 75%,rgba(10,10,10,.35) 100%)!important}
+@media (min-width:768px){
+ .canestri-hero{overflow:hidden}
+ .canestri-hero .wp-block-cover__image-background{transform:scale(1.22) translateX(9%);transform-origin:center}
+ .canestri-hero .wp-block-cover__inner-container{padding-left:clamp(0px,4vw,60px)}
+}
+@media (max-width:767px){.canestri-hero .wp-block-cover__background{background:linear-gradient(180deg,rgba(10,10,10,.78) 0%,rgba(10,10,10,.45) 55%,rgba(10,10,10,.3) 100%)!important}}
+
+/* 0.12.1: titolo del parco auto allineato al contenitore */
+.canestri-home .canestri-band>*{margin-left:auto!important;margin-right:auto!important;max-width:1200px!important}
+.canestri-home .canestri-home-h1{max-width:1200px!important;text-wrap:balance}
+
+/* 0.12.1: Chi siamo su grigio scuro */
+.canestri-home .canestri-about-sec{background:#2b2b2b!important;color:#d9d9d9}
+.canestri-about-sec .canestri-limo-h2{color:#fff!important}
+.canestri-about-sec p{color:#d0d0d0}
+.canestri-about-sec .is-style-outline .wp-block-button__link{color:#fff!important;border-color:#fff!important;background:transparent!important}
+.canestri-about-sec .is-style-outline .wp-block-button__link:hover{background:#fff!important;color:#2b2b2b!important}
+
+/* 0.12.2: hero meno tagliato, auto al centro */
+@media (min-width:768px){.canestri-hero .wp-block-cover__image-background{transform:none!important;object-position:50% 60%!important}}
+.canestri-hero{min-height:min(80vh,700px)!important}
+
+/* 0.12.2: icone flat monocromatiche */
+.canestri-feat-badge{flex:0 0 48px;width:48px;height:48px;border-radius:50%;background:#fff;color:var(--wp--preset--color--accent);display:inline-flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px rgba(227,59,50,.18)}
+.canestri-feat-badge .canestri-ico{width:24px;height:24px}
+.canestri-home .canestri-feat{gap:14px!important}
+
+/* 0.12.3: titoli allineati al contenitore, titoletti neri */
+.canestri-limo-sec>*,.canestri-section>*,.canestri-band>*{margin-left:auto!important;margin-right:auto!important}
+.canestri-limo-sec>.canestri-limo-h2.has-text-align-center,.canestri-limo-sec>.canestri-kicker.has-text-align-center{text-align:center}
+.canestri-home .canestri-kicker,.canestri-home .canestri-band .canestri-eyebrow{color:var(--wp--preset--color--dark)!important;letter-spacing:2px}
+.canestri-home .canestri-gallery-sec .canestri-kicker,.canestri-home .canestri-about-sec .canestri-kicker{color:#fff!important;opacity:.8}
+.canestri-occ-grid,.canestri-gallery{width:100%;max-width:1200px!important}
+
+/* 0.12.4: titoli e galleria allineati a sinistra con la griglia */
+.canestri-home .canestri-limo-sec>.canestri-kicker,.canestri-home .canestri-limo-sec>.canestri-limo-h2{text-align:left!important;width:100%;max-width:1200px!important}
+.canestri-home .canestri-kicker{color:var(--wp--preset--color--dark)!important}
+.canestri-home .canestri-gallery-sec .canestri-kicker{color:#fff!important}
+.canestri-gallery .wp-lightbox-container,.canestri-gallery .wp-lightbox-container img{height:100%}
+.canestri-gallery img{cursor:zoom-in;transition:transform .35s ease,filter .35s ease}
+.canestri-gallery figure{overflow:hidden;border-radius:8px}
+.canestri-gallery figure:hover img{transform:scale(1.04);filter:brightness(1.08)}
+
+/* 0.12.5: in home tutti i titoli e i testi delle sezioni allineati a sinistra */
+.canestri-home h2,.canestri-home .has-text-align-center,.canestri-home .canestri-kicker{text-align:left!important}
+.canestri-home .canestri-cta-band .wp-block-buttons,.canestri-home .canestri-band .wp-block-buttons,.canestri-home .canestri-section .wp-block-buttons{justify-content:flex-start!important}
+.canestri-home .canestri-cta-band>*{max-width:1200px!important}
+.canestri-home .canestri-cta-band{padding-inline:max(var(--wp--preset--spacing--30),calc((100vw - 1200px)/2))!important}
+
+/* 0.13.0: modulo preventivo a due colonne (home e contatti) */
+html{scroll-behavior:smooth}
+#preventivo{scroll-margin-top:110px}
+.canestri-cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px}
+.canestri-form-card .wpcf7-form label{display:block;margin:0 0 16px;font-size:.85rem;font-weight:700;color:var(--wp--preset--color--contrast)}
+.canestri-form-card .wpcf7-form br{display:none}
+.canestri-form-card .wpcf7-form-control-wrap{display:block}
+.canestri-form-card select{appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23444' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center!important;padding-right:38px!important}
+.canestri-form-card input::placeholder,.canestri-form-card textarea::placeholder{color:#a0a0a0}
+.canestri-form-card input:focus,.canestri-form-card textarea:focus,.canestri-form-card select:focus{outline:2px solid var(--wp--preset--color--accent-2);outline-offset:1px;border-color:transparent}
+.canestri-form-card .wpcf7-acceptance{display:block;font-size:.85rem;margin:4px 0 18px}
+.canestri-form-card .wpcf7-acceptance input{margin-right:8px;width:auto}
+.canestri-form-card .wpcf7-spinner{display:block;margin:10px auto 0}
+.canestri-form-card .wpcf7-response-output{border-radius:6px;margin:16px 0 0!important}
+.canestri-contact-form.canestri-form-card{background:#fff!important}
+@media (max-width:600px){.canestri-cf-grid{grid-template-columns:1fr}}
+.canestri-cf-grid>p{display:contents}
+/* 0.13.1: nessun widget chat flottante */
+.chaty,.chaty-widget,[id^=chaty-widget]{display:none!important}
+
+/* 0.13.2: header mobile, logo più grande e burger a destra */
+.canestri-header .wp-block-woocommerce-mini-cart,.canestri-header .wp-block-woocommerce-customer-account{display:none!important}
+@media (max-width:781px){
+ .canestri-header .canestri-logo{flex-shrink:0;order:1;margin-right:auto!important}
+ .canestri-header .canestri-logo img{width:132px!important;height:auto}
+ .canestri-scrolled .canestri-header .canestri-logo img{width:112px!important}
+ .canestri-header .wp-block-buttons{order:2}
+ .canestri-header .wp-block-navigation{order:3;margin-left:10px}
+}
+
+/* 0.13.3: header mobile che entra tutto nello schermo, menu aperto centrato */
+@media (max-width:781px){
+ .canestri-header,.canestri-topbar{padding-left:16px!important;padding-right:16px!important}
+ .canestri-header>.wp-block-group{gap:10px!important;width:100%}
+ .canestri-header .canestri-logo img{width:118px!important}
+ .canestri-scrolled .canestri-header .canestri-logo img{width:104px!important}
+ .canestri-header .wp-block-navigation{margin-left:2px!important;flex-shrink:0}
+ .canestri-header .canestri-header-cta{flex-shrink:1;min-width:0}
+ .canestri-header .is-menu-open .wp-block-navigation__responsive-close{padding:12px 0 16px!important}
+ .canestri-header .is-menu-open .wp-block-navigation__responsive-container-content{padding-left:24px!important;padding-right:24px!important;box-sizing:border-box}
+ .canestri-header .is-menu-open .wp-block-navigation__responsive-container-close{right:20px}
+}
+@media (max-width:360px){.canestri-header .canestri-logo img{width:100px!important}.canestri-header-cta .wp-block-button__link{padding:7px 9px!important;font-size:.68rem!important}}

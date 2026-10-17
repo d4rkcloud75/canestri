@@ -1,0 +1,274 @@
+{
+ "$schema": "https://schemas.wp.org/trunk/theme.json",
+ "version": 3,
+ "settings": {
+  "color": {
+   "palette": [
+    {
+     "slug": "base",
+     "name": "Bianco",
+     "color": "#FFFFFF"
+    },
+    {
+     "slug": "base-2",
+     "name": "Grigio chiaro",
+     "color": "#F5F5F5"
+    },
+    {
+     "slug": "contrast",
+     "name": "Titoli",
+     "color": "#444444"
+    },
+    {
+     "slug": "contrast-2",
+     "name": "Testo",
+     "color": "#5F5F5F"
+    },
+    {
+     "slug": "accent",
+     "name": "Rosso Canestri",
+     "color": "#E33B32"
+    },
+    {
+     "slug": "accent-2",
+     "name": "Blu link",
+     "color": "#1E73BE"
+    },
+    {
+     "slug": "dark",
+     "name": "Nero",
+     "color": "#111111"
+    },
+    {
+     "slug": "accent-3",
+     "name": "Blu scuro",
+     "color": "#155A96"
+    }
+   ]
+  },
+  "typography": {
+   "fontFamilies": [
+    {
+     "name": "Lato",
+     "slug": "lato",
+     "fontFamily": "\"Lato\", sans-serif",
+     "fontFace": [
+      {
+       "fontFamily": "Lato",
+       "fontStyle": "normal",
+       "fontWeight": "300",
+       "fontDisplay": "swap",
+       "src": [
+        "file:./assets/fonts/lato-latin-300-normal.woff2"
+       ]
+      },
+      {
+       "fontFamily": "Lato",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "fontDisplay": "swap",
+       "src": [
+        "file:./assets/fonts/lato-latin-400-normal.woff2"
+       ]
+      },
+      {
+       "fontFamily": "Lato",
+       "fontStyle": "normal",
+       "fontWeight": "700",
+       "fontDisplay": "swap",
+       "src": [
+        "file:./assets/fonts/lato-latin-700-normal.woff2"
+       ]
+      },
+      {
+       "fontFamily": "Lato",
+       "fontStyle": "normal",
+       "fontWeight": "900",
+       "fontDisplay": "swap",
+       "src": [
+        "file:./assets/fonts/lato-latin-900-normal.woff2"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Poppins",
+     "slug": "poppins",
+     "fontFamily": "\"Poppins\", sans-serif",
+     "fontFace": [
+      {
+       "fontFamily": "Poppins",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "fontDisplay": "swap",
+       "src": [
+        "file:./assets/fonts/poppins-latin-400-normal.woff2"
+       ]
+      },
+      {
+       "fontFamily": "Poppins",
+       "fontStyle": "normal",
+       "fontWeight": "500",
+       "fontDisplay": "swap",
+       "src": [
+        "file:./assets/fonts/poppins-latin-500-normal.woff2"
+       ]
+      },
+      {
+       "fontFamily": "Poppins",
+       "fontStyle": "normal",
+       "fontWeight": "600",
+       "fontDisplay": "swap",
+       "src": [
+        "file:./assets/fonts/poppins-latin-600-normal.woff2"
+       ]
+      }
+     ]
+    }
+   ],
+   "fontSizes": [
+    {
+     "slug": "small",
+     "name": "Piccolo",
+     "size": "0.875rem"
+    },
+    {
+     "slug": "medium",
+     "name": "Medio",
+     "size": "1rem"
+    },
+    {
+     "slug": "large",
+     "name": "Grande",
+     "size": "1.375rem",
+     "fluid": {
+      "min": "1.2rem",
+      "max": "1.375rem"
+     }
+    },
+    {
+     "slug": "x-large",
+     "name": "Molto grande",
+     "size": "1.75rem",
+     "fluid": {
+      "min": "1.4rem",
+      "max": "1.75rem"
+     }
+    },
+    {
+     "slug": "xx-large",
+     "name": "Enorme",
+     "size": "2.25rem",
+     "fluid": {
+      "min": "1.75rem",
+      "max": "2.25rem"
+     }
+    }
+   ]
+  },
+  "layout": {
+   "contentSize": "780px",
+   "wideSize": "1200px"
+  }
+ },
+ "styles": {
+  "color": {
+   "background": "var:preset|color|base",
+   "text": "var:preset|color|contrast-2"
+  },
+  "typography": {
+   "fontFamily": "var:preset|font-family|lato",
+   "fontSize": "var:preset|font-size|medium",
+   "lineHeight": "1.65",
+   "fontWeight": "400"
+  },
+  "elements": {
+   "heading": {
+    "color": {
+     "text": "var:preset|color|contrast"
+    },
+    "typography": {
+     "fontFamily": "var:preset|font-family|lato",
+     "lineHeight": "1.25",
+     "letterSpacing": "0"
+    }
+   },
+   "h1": {
+    "typography": {
+     "fontSize": "var:preset|font-size|xx-large",
+     "fontWeight": "900",
+     "textTransform": "uppercase"
+    }
+   },
+   "h2": {
+    "typography": {
+     "fontSize": "var:preset|font-size|x-large",
+     "fontWeight": "300",
+     "textTransform": "uppercase"
+    }
+   },
+   "h3": {
+    "typography": {
+     "fontSize": "var:preset|font-size|large",
+     "fontWeight": "700"
+    }
+   },
+   "link": {
+    "color": {
+     "text": "var:preset|color|accent-2"
+    },
+    ":hover": {
+     "color": {
+      "text": "var:preset|color|accent"
+     }
+    }
+   },
+   "button": {
+    "color": {
+     "background": "var:preset|color|accent-2",
+     "text": "var:preset|color|base"
+    },
+    "typography": {
+     "fontFamily": "var:preset|font-family|poppins",
+     "fontWeight": "500",
+     "fontSize": "var:preset|font-size|small"
+    },
+    "border": {
+     "radius": "4px"
+    },
+    ":hover": {
+     "color": {
+      "background": "var:preset|color|accent-3",
+      "text": "var:preset|color|base"
+     }
+    }
+   }
+  }
+ },
+ "templateParts": [
+  {
+   "name": "header",
+   "title": "Header",
+   "area": "header"
+  },
+  {
+   "name": "footer",
+   "title": "Footer",
+   "area": "footer"
+  },
+  {
+   "name": "sidebar",
+   "title": "Sidebar blog",
+   "area": "uncategorized"
+  }
+ ],
+ "customTemplates": [
+  {
+   "name": "page-larga",
+   "title": "Pagina larga (senza sidebar)",
+   "postTypes": [
+    "page"
+   ]
+  }
+ ]
+}
