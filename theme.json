@@ -169,6 +169,14 @@
   "layout": {
    "contentSize": "780px",
    "wideSize": "1200px"
+  },
+  "blocks": {
+   "core/image": {
+    "lightbox": {
+     "enabled": true,
+     "allowEditing": true
+    }
+   }
   }
  },
  "styles": {

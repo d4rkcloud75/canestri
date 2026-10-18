@@ -361,8 +361,6 @@ add_filter(
 			case 'woocommerce/product-template':
 			case 'core/post-template':
 				return canestri_set_sizes( $html, '(max-width: 600px) 55vw, (max-width: 781px) 45vw, 390px' );
-			case 'core/gallery':
-				return canestri_set_sizes( $html, '(max-width: 781px) 46vw, 300px' );
 			case 'core/group':
 				if ( preg_match( '/(^|\s)canestri-gallery(\s|$)/', $class ) ) {
 					return canestri_set_sizes( $html, '(max-width: 781px) 46vw, 300px' );
