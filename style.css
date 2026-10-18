@@ -4,7 +4,7 @@ Theme URI: https://canestriautonoleggi.com/
 Author: Carmelo Brischetto
 Description: Tema figlio a blocchi di Twenty Twenty-Five per Canestri Autonoleggi.
 Template: twentytwentyfive
-Version: 0.16.5
+Version: 0.16.6
 Requires at least: 6.7
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
@@ -559,3 +559,7 @@ main.canestri-faq-page{max-width:1100px;margin:32px auto 72px!important;padding:
 .canestri-occ .wp-block-cover__inner-container{position:absolute!important;inset:0;width:auto!important;max-width:none!important;margin:0!important;padding:20px;display:flex;align-items:flex-end;z-index:2}
 .canestri-occ{cursor:pointer}
 @media (max-width:781px){.canestri-occ .wp-block-cover__inner-container{padding:14px}}
+
+/* 0.16.6: pulsante del modulo sempre dentro la scheda, anche da telefono */
+.wpcf7-form input[type=submit]{box-sizing:border-box;max-width:100%;white-space:normal;line-height:1.3}
+.canestri-form-card input[type=submit]{padding:15px 16px}
