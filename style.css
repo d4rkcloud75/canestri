@@ -4,7 +4,7 @@ Theme URI: https://canestriautonoleggi.com/
 Author: Carmelo Brischetto
 Description: Tema figlio a blocchi di Twenty Twenty-Five per Canestri Autonoleggi.
 Template: twentytwentyfive
-Version: 0.15.1
+Version: 0.16.0
 Requires at least: 6.7
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
@@ -493,3 +493,43 @@ main.canestri-faq-page{max-width:1100px;margin:32px auto 72px!important;padding:
 /* 0.15.0: icone flat nei pulsanti WhatsApp e Chiama */
 .wp-block-button__link:has(.canestri-ico){display:inline-flex;align-items:center;justify-content:center;gap:8px}
 .wp-block-button__link .canestri-ico{width:18px;height:18px;flex:0 0 18px}
+
+/* 0.16.0: menu mobile ridisegnato */
+.canestri-header .wp-block-navigation__responsive-container:not(.is-menu-open) .canestri-nav-cta{display:none!important}
+.canestri-header .wp-block-navigation__responsive-container.is-menu-open{background:#fff!important;animation:canestri-menu-slide .32s cubic-bezier(.2,.8,.2,1)}
+@keyframes canestri-menu-slide{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.canestri-header .wp-block-navigation__responsive-container.is-menu-open{animation:none}}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-dialog{position:relative}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-dialog::before{content:"";position:absolute;left:0;top:2px;width:112px;height:50px;background:url(/wp-content/uploads/2025/11/logo-canestri-group-02.png) left center/contain no-repeat}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-dialog::after{content:"";position:absolute;left:-24px;right:-24px;top:66px;border-top:1px solid #eee}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-close{padding:14px 24px 28px!important}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-container-close{top:6px!important;right:0!important;width:42px;height:42px;border-radius:50%;background:#f2f2f2;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-container-close:hover{background:#e7e7e7}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-container-close svg{width:22px!important;height:22px!important}
+.canestri-header .is-menu-open .wp-block-navigation__responsive-container-content{padding-top:84px!important}
+.canestri-header .is-menu-open .wp-block-navigation__container{flex-direction:row!important;flex-wrap:wrap!important;column-gap:10px!important;align-items:flex-start!important}
+.canestri-header .is-menu-open .wp-block-navigation__container::after{content:none!important;display:none!important}
+.canestri-header .is-menu-open .wp-block-navigation__container>.wp-block-navigation-item{width:100%;border-bottom:1px solid #f0f0f0}
+.canestri-header .is-menu-open .wp-block-navigation__container>.wp-block-navigation-item:not(.has-child):not(.canestri-nav-cta)>.wp-block-navigation-item__content{display:flex!important;align-items:center;justify-content:space-between;padding:15px 2px!important;font-size:1.08rem!important;font-weight:600!important;color:var(--wp--preset--color--dark)!important}
+.canestri-header .is-menu-open .wp-block-navigation__container>.wp-block-navigation-item:not(.has-child):not(.canestri-nav-cta)>.wp-block-navigation-item__content::after{content:"";width:8px;height:8px;border-right:2px solid #c4c4c4;border-top:2px solid #c4c4c4;transform:rotate(45deg);margin-right:6px}
+.canestri-header .is-menu-open .wp-block-navigation-item.has-child>.wp-block-navigation-item__content{font-size:.7rem!important;font-weight:700!important;letter-spacing:1.6px;color:var(--wp--preset--color--accent)!important;padding:18px 2px 10px!important}
+.canestri-header .is-menu-open .canestri-mega>.wp-block-navigation__submenu-container{grid-template-columns:1fr 1fr!important;gap:10px!important;padding:0 0 16px!important}
+.canestri-header .is-menu-open .canestri-mega-item>.wp-block-navigation-item__content{position:relative;display:block!important;border-radius:12px;overflow:hidden;padding:0!important;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.canestri-header .is-menu-open .canestri-mega-item img{margin:0!important;border-radius:0!important;aspect-ratio:4/3!important;transition:transform .35s ease}
+.canestri-header .is-menu-open .canestri-mega-item>.wp-block-navigation-item__content::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,0) 58%)}
+.canestri-header .is-menu-open .canestri-mega-item:active img{transform:scale(1.04)}
+.canestri-header .is-menu-open .canestri-mega-t{position:absolute;left:10px;right:10px;bottom:8px;z-index:2;color:#fff!important;font-weight:600!important;font-size:.9rem!important;line-height:1.2}
+.canestri-header .is-menu-open .wp-block-navigation__submenu-container:has(.canestri-city-pre){display:flex!important;flex-wrap:wrap;gap:8px!important;padding:0 0 16px!important}
+.canestri-header .is-menu-open .wp-block-navigation-item:has(.canestri-city-pre){width:auto!important}
+.canestri-header .is-menu-open .wp-block-navigation-item:has(.canestri-city-pre)>.wp-block-navigation-item__content{padding:8px 18px!important;border:1px solid #e3e3e3;border-radius:999px;font-size:.95rem!important;color:var(--wp--preset--color--dark)!important}
+.canestri-header .is-menu-open .canestri-nav-cta{border-bottom:0!important;margin-top:12px}
+.canestri-header .is-menu-open .canestri-nav-wa,.canestri-header .is-menu-open .canestri-nav-call{width:calc(50% - 5px)!important}
+.canestri-header .is-menu-open .canestri-nav-quote{margin-top:22px}
+.canestri-header .is-menu-open .canestri-nav-cta>.wp-block-navigation-item__content{display:flex!important;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 10px!important;border-radius:8px;color:#fff!important;font-weight:600!important;font-size:1rem!important;text-align:center!important}
+.canestri-header .is-menu-open .canestri-nav-quote>.wp-block-navigation-item__content{background:var(--wp--preset--color--accent)}
+.canestri-header .is-menu-open .canestri-nav-wa>.wp-block-navigation-item__content{background:#1e7145}
+.canestri-header .is-menu-open .canestri-nav-call>.wp-block-navigation-item__content{background:var(--wp--preset--color--accent-2)}
+.canestri-header .is-menu-open .canestri-nav-wa>.wp-block-navigation-item__content::before,.canestri-header .is-menu-open .canestri-nav-call>.wp-block-navigation-item__content::before{content:"";width:18px;height:18px;flex:0 0 18px;background:currentColor;-webkit-mask:var(--canestri-ico) center/contain no-repeat;mask:var(--canestri-ico) center/contain no-repeat}
+.canestri-header .is-menu-open .canestri-nav-wa{--canestri-ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z'/%3E%3C/svg%3E")}
+.canestri-header .is-menu-open .canestri-nav-call{--canestri-ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z'/%3E%3C/svg%3E")}
+.canestri-header .is-menu-open .canestri-nav-hours{display:none}
