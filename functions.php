@@ -452,10 +452,17 @@ add_filter( 'render_block_woocommerce/customer-account', function ( $html ) { re
 add_action(
 	'wp_head',
 	function () {
-		if ( ! is_page( 'faq' ) ) {
+		$map = array( 'faq' => 'faq-schema.json', 'noleggio-auto-depoca-roma' => 'faq-epoca-schema.json' );
+		$name = '';
+		foreach ( $map as $slug => $f ) {
+			if ( is_page( $slug ) ) {
+				$name = $f;
+			}
+		}
+		if ( '' === $name ) {
 			return;
 		}
-		$file = get_stylesheet_directory() . '/assets/faq-schema.json';
+		$file = get_stylesheet_directory() . '/assets/' . $name;
 		if ( file_exists( $file ) ) {
 			echo '<script type="application/ld+json">' . file_get_contents( $file ) . '</script>' . "\n"; // phpcs:ignore
 		}
@@ -467,6 +474,9 @@ add_filter(
 		if ( is_page( 'faq' ) && '' === trim( (string) $desc ) ) {
 			return 'Quanto costa un\'auto d\'epoca per il matrimonio a Roma, autista, nastri e fiori, prenotazione: tutte le risposte di Canestri Autonoleggi. Preventivo gratuito in giornata.';
 		}
+		if ( is_page( 'noleggio-auto-depoca-roma' ) && '' === trim( (string) $desc ) ) {
+			return 'Noleggio auto d\'epoca a Roma con autista: Rolls-Royce, Bentley, Jaguar e cabrio storiche per matrimoni, cerimonie e servizi fotografici. Da 180 euro, preventivo in giornata.';
+		}
 		return $desc;
 	}
 );
@@ -475,6 +485,9 @@ add_filter(
 	function ( $title ) {
 		if ( is_page( 'faq' ) ) {
 			return 'Domande frequenti sul noleggio auto per matrimoni a Roma | Canestri Autonoleggi';
+		}
+		if ( is_page( 'noleggio-auto-depoca-roma' ) ) {
+			return 'Noleggio auto d\'epoca a Roma con autista, da 180 € | Canestri Autonoleggi';
 		}
 		return $title;
 	}
@@ -491,7 +504,7 @@ function canestri_page_css( $file ) {
 		'product'   => is_singular( 'product' ),
 		'contact'   => is_page( 'contact' ) || is_page( 'contatti' ) || ( $id && 'page-contact' === get_page_template_slug( $id ) ),
 		'elementor' => is_singular( 'product' ) || ( is_singular() && ! is_front_page() && ! canestri_slug_template() && canestri_is_elementor_page( $id ) ),
-		'faq'       => is_page( 'faq' ),
+		'faq'       => is_page( 'faq' ) || (bool) canestri_slug_template(),
 	);
 	$key = 'canestri_css_' . md5( filemtime( $file ) . wp_json_encode( $keep ) );
 	$css = get_transient( $key );
