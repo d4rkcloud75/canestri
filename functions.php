@@ -642,3 +642,38 @@ add_filter(
 
 /* "sizes=auto" fa usare al browser la larghezza a schermo e ignora le misure impostate dal tema: lo togliamo. */
 add_filter( 'wp_img_tag_add_auto_sizes', '__return_false' );
+
+/**
+ * Gli stili dei blocchi che stanno solo più in basso nella pagina (icone social del footer,
+ * schede auto, news, colonne di "Chi siamo") vengono scritti in fondo alla pagina invece che
+ * nell'intestazione: il browser disegna prima la parte alta senza doverli leggere.
+ */
+function canestri_late_style_handles() {
+	return array( 'wp-block-social-links', 'wp-block-post-featured-image', 'wp-block-post-template', 'wp-block-read-more', 'wp-block-columns', 'wc-blocks-style-product-image', 'woocommerce-product-template-style' );
+}
+add_action(
+	'wp_head',
+	function () {
+		if ( is_admin() || ! is_front_page() ) {
+			return;
+		}
+		$GLOBALS['canestri_late_styles'] = array();
+		foreach ( canestri_late_style_handles() as $h ) {
+			if ( wp_style_is( $h, 'enqueued' ) ) {
+				wp_dequeue_style( $h );
+				$GLOBALS['canestri_late_styles'][] = $h;
+			}
+		}
+	},
+	1
+);
+add_action(
+	'wp_footer',
+	function () {
+		if ( empty( $GLOBALS['canestri_late_styles'] ) ) {
+			return;
+		}
+		wp_print_styles( $GLOBALS['canestri_late_styles'] );
+	},
+	1
+);
