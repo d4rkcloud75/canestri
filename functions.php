@@ -506,7 +506,7 @@ function canestri_page_css( $file ) {
 		'elementor' => is_singular( 'product' ) || ( is_singular() && ! is_front_page() && ! canestri_slug_template() && canestri_is_elementor_page( $id ) ),
 		'faq'       => is_page( 'faq' ) || (bool) canestri_slug_template(),
 	);
-	$key = 'canestri_css_' . md5( filemtime( $file ) . wp_json_encode( $keep ) );
+	$key = 'canestri_css_' . md5( $file . filemtime( $file ) . wp_json_encode( $keep ) );
 	$css = get_transient( $key );
 	if ( false !== $css ) {
 		return $css;
@@ -687,4 +687,39 @@ add_action(
 		wp_print_styles( $GLOBALS['canestri_late_styles'] );
 	},
 	1
+);
+
+/**
+ * Shop (pagina Elementor ID 9): CSS di griglia, paginazione e filtri, e pulsante
+ * "Mostra filtri" su mobile. Sostituiscono lo snippet "Shop mobile: pulsante Mostra filtri"
+ * e il CSS aggiuntivo dell'editor.
+ * Il CSS è scritto in linea (niente file in più da scaricare). Anche il JS è in linea
+ * nel footer: un file esterno verrebbe ritardato da Velox DelayJS fino alla prima interazione.
+ */
+function canestri_is_shop_page() {
+	return is_page( 9 ) || ( function_exists( 'is_shop' ) && is_shop() );
+}
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		$file = get_stylesheet_directory() . '/assets/css/shop.css';
+		if ( is_admin() || ! canestri_is_shop_page() || ! is_readable( $file ) ) {
+			return;
+		}
+		wp_register_style( 'canestri-shop', false, array(), null );
+		wp_enqueue_style( 'canestri-shop' );
+		wp_add_inline_style( 'canestri-shop', canestri_page_css( $file ) );
+	},
+	21
+);
+add_action(
+	'wp_footer',
+	function () {
+		$file = get_stylesheet_directory() . '/assets/js/shop-filtri.js';
+		if ( is_admin() || ! canestri_is_shop_page() || ! is_readable( $file ) ) {
+			return;
+		}
+		echo '<script id="canestri-shop-filtri-js">' . file_get_contents( $file ) . "</script>\n"; // phpcs:ignore
+	},
+	100
 );
