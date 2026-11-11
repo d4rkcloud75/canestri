@@ -796,7 +796,11 @@ add_shortcode(
 		if ( $atts['canale'] && ! empty( $data['canale'] ) ) {
 			$out .= '<li class="cn-video__card"><a class="cn-video__more" href="' . esc_url( $data['canale'] ) . '" target="_blank" rel="noopener">' . esc_html( $atts['canale'] ) . '<span>Apri YouTube</span></a></li>';
 		}
-		return $out . '</ul>';
+		$out .= '</ul>';
+		if ( 'reel' === $atts['layout'] ) {
+			$out = '<div class="cn-slider"><button type="button" class="cn-slider__btn cn-slider__btn--prev" aria-label="Video precedenti" disabled></button>' . $out . '<button type="button" class="cn-slider__btn cn-slider__btn--next" aria-label="Video successivi"></button></div><div class="cn-slider__dots" aria-label="Scegli il video"></div>';
+		}
+		return $out;
 	}
 );
 add_action(
