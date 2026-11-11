@@ -723,3 +723,103 @@ add_action(
 	},
 	100
 );
+
+/**
+ * Video YouTube: shortcode [canestri_video gruppo="shorts" max="6" layout="reel"].
+ * Gruppi ed elenco in assets/video/video.json, copertine in assets/video/<ID>.webp (salvate nel tema:
+ * all'apertura della pagina non parte nessuna richiesta verso YouTube). Il lettore youtube-nocookie
+ * si carica solo al clic, con il JS in linea nel footer (un file esterno verrebbe ritardato da Velox).
+ * Il CSS è in linea nell'head sulla home e sulla pagina /video/; altrove lo scrive lo shortcode stesso
+ * (nei temi a blocchi il template viene generato prima di wp_head).
+ */
+function canestri_video_data() {
+	static $data = null;
+	if ( null === $data ) {
+		$file = get_stylesheet_directory() . '/assets/video/video.json';
+		$data = is_readable( $file ) ? json_decode( (string) file_get_contents( $file ), true ) : array();
+		$data = is_array( $data ) ? $data : array();
+	}
+	return $data;
+}
+function canestri_video_page() {
+	return is_front_page() || is_page( 'video' );
+}
+add_shortcode(
+	'canestri_video',
+	function ( $atts ) {
+		$atts   = shortcode_atts( array( 'gruppo' => 'shorts', 'max' => 0, 'layout' => 'griglia', 'canale' => '' ), $atts, 'canestri_video' );
+		$data   = canestri_video_data();
+		$videos = isset( $data['gruppi'][ $atts['gruppo'] ] ) ? (array) $data['gruppi'][ $atts['gruppo'] ] : array();
+		if ( (int) $atts['max'] > 0 ) {
+			$videos = array_slice( $videos, 0, (int) $atts['max'] );
+		}
+		if ( ! $videos ) {
+			return '';
+		}
+		$GLOBALS['canestri_video_used'] = true;
+		$short = 'shorts' === $atts['gruppo'];
+		$dir   = get_stylesheet_directory();
+		$uri   = get_stylesheet_directory_uri();
+		$class = 'cn-video ' . ( 'reel' === $atts['layout'] ? 'cn-video--reel' : ( $short ? 'cn-video--short' : 'cn-video--wide cn-video--n' . count( $videos ) ) );
+		$out   = '';
+		if ( empty( $GLOBALS['canestri_video_css'] ) && ! canestri_video_page() ) {
+			$file = $dir . '/assets/css/video.css';
+			if ( is_readable( $file ) ) {
+				$out .= '<style id="canestri-video-css">' . canestri_page_css( $file ) . '</style>';
+			}
+			$GLOBALS['canestri_video_css'] = true;
+		}
+		$out .= '<ul class="' . esc_attr( $class ) . '">';
+		foreach ( $videos as $v ) {
+			$id = isset( $v['id'] ) ? preg_replace( '/[^A-Za-z0-9_-]/', '', $v['id'] ) : '';
+			if ( ! $id ) {
+				continue;
+			}
+			$title = isset( $v['titolo'] ) ? $v['titolo'] : '';
+			$img   = is_readable( $dir . '/assets/video/' . $id . '.webp' ) ? $uri . '/assets/video/' . $id . '.webp' : 'https://i.ytimg.com/vi/' . $id . '/hqdefault.jpg';
+			$w     = $short ? 360 : 640;
+			$h     = $short ? 640 : 360;
+			$out  .= '<li class="cn-video__card"><div class="cn-video__media' . ( $short ? '' : ' cn-video__media--wide' ) . '">';
+			$out  .= '<img src="' . esc_url( $img ) . '" alt="" width="' . $w . '" height="' . $h . '" loading="lazy" decoding="async">';
+			$badge = ! empty( $v['etichetta'] ) ? $v['etichetta'] : ( $short ? 'Shorts' : ( isset( $v['tipo'] ) ? $v['tipo'] : '' ) );
+			if ( $badge ) {
+				$out .= '<span class="cn-video__badge' . ( ! empty( $v['etichetta'] ) ? ' cn-video__badge--top' : '' ) . '">' . esc_html( $badge ) . '</span>';
+			}
+			$out .= '<div class="cn-video__meta">' . ( $short && ! empty( $v['tipo'] ) ? '<small>' . esc_html( $v['tipo'] ) . '</small>' : '' ) . '<strong>' . esc_html( $title ) . '</strong></div>';
+			$out .= '<button type="button" class="cn-video__play" data-yt="' . esc_attr( $id ) . '" data-title="' . esc_attr( $title ) . '" aria-label="' . esc_attr( 'Guarda il video: ' . $title ) . '"></button>';
+			$out .= '</div>';
+			if ( ! empty( $v['link'] ) ) {
+				$out .= '<a class="cn-video__link" href="' . esc_url( $v['link'] ) . '">' . esc_html( ! empty( $v['testo_link'] ) ? $v['testo_link'] : 'Scopri di più' ) . '</a>';
+			}
+			$out .= '</li>';
+		}
+		if ( $atts['canale'] && ! empty( $data['canale'] ) ) {
+			$out .= '<li class="cn-video__card"><a class="cn-video__more" href="' . esc_url( $data['canale'] ) . '" target="_blank" rel="noopener">' . esc_html( $atts['canale'] ) . '<span>Apri YouTube</span></a></li>';
+		}
+		return $out . '</ul>';
+	}
+);
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		$file = get_stylesheet_directory() . '/assets/css/video.css';
+		if ( is_admin() || ! canestri_video_page() || ! is_readable( $file ) ) {
+			return;
+		}
+		wp_register_style( 'canestri-video', false, array(), null );
+		wp_enqueue_style( 'canestri-video' );
+		wp_add_inline_style( 'canestri-video', canestri_page_css( $file ) );
+	},
+	21
+);
+add_action(
+	'wp_footer',
+	function () {
+		$file = get_stylesheet_directory() . '/assets/js/video.js';
+		if ( is_admin() || empty( $GLOBALS['canestri_video_used'] ) || ! is_readable( $file ) ) {
+			return;
+		}
+		echo '<script id="canestri-video-js">' . file_get_contents( $file ) . "</script>\n"; // phpcs:ignore
+	},
+	100
+);

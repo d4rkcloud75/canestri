@@ -1,0 +1,46 @@
+/* Sezione video (shortcode [canestri_video]): copertine locali, YouTube caricato solo al clic. */
+.cn-video-head{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between}
+.cn-video-head .canestri-limo-h2{margin-bottom:10px!important}
+.cn-video-lead{margin:0 0 28px;max-width:62ch}
+.cn-video{display:grid;gap:28px 18px;margin:0;padding:0;list-style:none}
+.cn-video--reel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:thin;overscroll-behavior-x:contain}
+.cn-video--reel>.cn-video__card{flex:0 0 calc((100% - 64px)/5);scroll-snap-align:start}
+.cn-video--short{grid-template-columns:repeat(6,minmax(0,1fr))}
+.cn-video--wide{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cn-video--wide.cn-video--n2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cn-video__card{display:grid;gap:10px;align-content:start;min-width:0;margin:0}
+.cn-video__media{position:relative;aspect-ratio:9/16;border-radius:6px;overflow:hidden;background:#1a1a1a}
+.cn-video__media--wide{aspect-ratio:16/9}
+.cn-video__media img,.cn-video__media iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;display:block}
+.cn-video__media:not(.is-playing)::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0,rgba(0,0,0,0) 48%);pointer-events:none}
+.cn-video__badge{position:absolute;z-index:2;top:10px;left:10px;background:rgba(0,0,0,.6);color:#fff;font:600 11px/1 var(--wp--preset--font-family--poppins);padding:5px 8px;border-radius:3px}
+.cn-video__badge--top{background:var(--wp--preset--color--accent)}
+.cn-video__play{position:absolute;z-index:3;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;background:transparent;cursor:pointer}
+.cn-video__play::before{content:"";position:absolute;left:50%;top:45%;width:60px;height:60px;transform:translate(-50%,-50%);border-radius:50%;border:2px solid rgba(255,255,255,.9);background:rgba(227,59,50,.92);transition:transform .15s}
+.cn-video__play::after{content:"";position:absolute;left:50%;top:45%;transform:translate(-35%,-50%);border-style:solid;border-width:10px 0 10px 17px;border-color:transparent transparent transparent #fff}
+.cn-video__play:hover::before,.cn-video__play:focus-visible::before{transform:translate(-50%,-50%) scale(1.07)}
+.cn-video__play:focus-visible{outline:3px solid #fff;outline-offset:-6px}
+.cn-video__meta{position:absolute;z-index:2;left:12px;right:12px;bottom:12px;color:#fff;display:grid;gap:3px;pointer-events:none}
+.cn-video__meta small{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:.85}
+.cn-video__meta strong{font-size:15px;font-weight:900;line-height:1.15;text-transform:uppercase}
+.cn-video__media.is-playing .cn-video__badge,.cn-video__media.is-playing .cn-video__meta,.cn-video__media.is-playing img{display:none}
+.cn-video__link{font-size:14px;color:var(--wp--preset--color--accent-2);text-decoration:none}
+.cn-video__link:hover{text-decoration:underline}
+.cn-video__more{aspect-ratio:9/16;border:2px dashed #cfd4da;border-radius:6px;display:grid;place-content:center;gap:10px;padding:16px;text-align:center;text-decoration:none;color:var(--wp--preset--color--dark);font-weight:900;text-transform:uppercase;line-height:1.2}
+.cn-video__more span{font:500 13px var(--wp--preset--font-family--poppins);text-transform:none;color:var(--wp--preset--color--accent-2)}
+.cn-video-jump{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.cn-video-jump a{font:500 13px var(--wp--preset--font-family--poppins);border:1px solid #d5d8dc;border-radius:999px;padding:8px 16px;color:#333;background:#fff;text-decoration:none}
+.cn-video-jump a:hover{border-color:var(--wp--preset--color--accent-2);color:var(--wp--preset--color--accent-2)}
+.cn-video-sec h2{scroll-margin-top:90px}
+@media (max-width:1024px){.cn-video--short{grid-template-columns:repeat(4,minmax(0,1fr))}.cn-video--reel>.cn-video__card{flex-basis:calc((100% - 48px)/4)}}
+@media (max-width:700px){
+.cn-video--reel{margin-right:calc(-1 * var(--wp--preset--spacing--30));padding-right:var(--wp--preset--spacing--30)}
+.cn-video--reel>.cn-video__card{flex-basis:62%}
+.cn-video--short{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
+.cn-video--wide,.cn-video--wide.cn-video--n2{grid-template-columns:1fr}
+.cn-video--short .cn-video__meta strong{font-size:13px}
+.cn-video--short .cn-video__play::before{width:48px;height:48px}
+}
+@media (prefers-reduced-motion:reduce){.cn-video__play::before{transition:none}}
+.canestri-video .is-style-outline .wp-block-button__link,.canestri-video-page .is-style-outline .wp-block-button__link{background:transparent!important;color:var(--wp--preset--color--accent-2)!important;border:1px solid currentColor!important}
+.canestri-video .is-style-outline .wp-block-button__link:hover,.canestri-video-page .is-style-outline .wp-block-button__link:hover{background:var(--wp--preset--color--accent-2)!important;color:#fff!important}
