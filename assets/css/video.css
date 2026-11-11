@@ -1,7 +1,8 @@
 /* Sezione video (shortcode [canestri_video]): copertine locali, YouTube caricato solo al clic. */
 .cn-video-head{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between}
 .cn-video-head .canestri-limo-h2{margin-bottom:10px!important}
-.cn-video-lead{margin:0 0 28px;max-width:62ch}
+.cn-video-lead{margin:0 0 28px;max-width:none!important}
+.canestri-video-page .canestri-limo-h1{max-width:none}
 .cn-video{display:grid;gap:28px 18px;margin:0;padding:0;list-style:none}
 .cn-video--reel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:thin;overscroll-behavior-x:contain}
 .cn-video--reel>.cn-video__card{flex:0 0 calc((100% - 64px)/5);scroll-snap-align:start}
