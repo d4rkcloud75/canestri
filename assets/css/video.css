@@ -81,3 +81,5 @@ html.cn-vmodal-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.cn-video__play::before,.cn-slider__btn,.cn-slider__dots button{transition:none}.cn-video--reel{scroll-behavior:auto}}
 .canestri-video .is-style-outline .wp-block-button__link,.canestri-video-page .is-style-outline .wp-block-button__link{background:transparent!important;color:var(--wp--preset--color--accent-2)!important;border:1px solid currentColor!important}
 .canestri-video .is-style-outline .wp-block-button__link:hover,.canestri-video-page .is-style-outline .wp-block-button__link:hover{background:var(--wp--preset--color--accent-2)!important;color:#fff!important}
+/* le card dello slider escono dal contenitore per scorrere: la pagina non deve mai scorrere di lato */
+.canestri-video,.cn-video-sec{overflow-x:clip}

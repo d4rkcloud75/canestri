@@ -998,3 +998,19 @@ add_action(
 );
 add_action( 'after_switch_theme', 'canestri_video_refresh' );
 add_action( 'upgrader_process_complete', function () { wp_schedule_single_event( time() + 30, 'canestri_video_refresh' ); } );
+
+/**
+ * Il blocco Shortcode applica wpautop all'HTML già generato (nei template a blocchi gli shortcode
+ * vengono espansi prima dei blocchi): per i video restituiamo l'HTML così com'è, senza <p> spezzati.
+ */
+add_filter(
+	'pre_render_block',
+	function ( $pre, $block ) {
+		if ( null === $pre && isset( $block['blockName'] ) && 'core/shortcode' === $block['blockName'] && ! empty( $block['innerHTML'] ) && false !== strpos( $block['innerHTML'], 'cn-video' ) ) {
+			return $block['innerHTML'];
+		}
+		return $pre;
+	},
+	10,
+	2
+);
