@@ -750,6 +750,9 @@ add_shortcode(
 		$atts   = shortcode_atts( array( 'gruppo' => 'shorts', 'max' => 0, 'layout' => 'griglia', 'canale' => '' ), $atts, 'canestri_video' );
 		$data   = canestri_video_data();
 		$videos = isset( $data['gruppi'][ $atts['gruppo'] ] ) ? (array) $data['gruppi'][ $atts['gruppo'] ] : array();
+		if ( 'shorts' === $atts['gruppo'] ) {
+			$videos = canestri_video_shorts( $videos, 'reel' === $atts['layout'] );
+		}
 		if ( (int) $atts['max'] > 0 ) {
 			$videos = array_slice( $videos, 0, (int) $atts['max'] );
 		}
@@ -776,7 +779,13 @@ add_shortcode(
 				continue;
 			}
 			$title = isset( $v['titolo'] ) ? $v['titolo'] : '';
-			$img   = is_readable( $dir . '/assets/video/' . $id . '.webp' ) ? $uri . '/assets/video/' . $id . '.webp' : 'https://i.ytimg.com/vi/' . $id . '/hqdefault.jpg';
+			if ( is_readable( $dir . '/assets/video/' . $id . '.webp' ) ) {
+				$img = $uri . '/assets/video/' . $id . '.webp';
+			} elseif ( ! empty( $v['img'] ) ) {
+				$img = $v['img'];
+			} else {
+				$img = 'https://i.ytimg.com/vi/' . $id . '/hqdefault.jpg';
+			}
 			$w     = $short ? 360 : 640;
 			$h     = $short ? 640 : 360;
 			$out  .= '<li class="cn-video__card"><div class="cn-video__media' . ( $short ? '' : ' cn-video__media--wide' ) . '">';
@@ -827,3 +836,165 @@ add_action(
 	},
 	100
 );
+
+/**
+ * Ultimi Shorts dal canale YouTube, senza toccare WordPress a mano.
+ * Ogni ora WP-Cron legge il feed pubblico del canale (ultimi 15 video), salva l'elenco nell'opzione
+ * canestri_yt_feed e prepara la copertina in uploads/canestri-video/<ID>.webp: la pagina non chiama mai YouTube.
+ * Gli Shorts già presenti in video.json tengono titolo, etichetta e link scritti lì; per quelli nuovi il titolo
+ * viene ripulito dagli hashtag e link ed etichetta dipendono dalle parole del titolo.
+ * Ordine: dal più recente; in coda gli Shorts di video.json che il feed non contiene più.
+ */
+function canestri_video_feed_items() {
+	$items = get_option( 'canestri_yt_feed' );
+	return is_array( $items ) ? $items : array();
+}
+function canestri_video_shorts( $curated, $home ) {
+	$data  = canestri_video_data();
+	$byid  = array();
+	foreach ( $curated as $v ) {
+		if ( ! empty( $v['id'] ) ) {
+			$byid[ $v['id'] ] = $v;
+		}
+	}
+	$out  = array();
+	$seen = array();
+	foreach ( canestri_video_feed_items() as $f ) {
+		if ( empty( $f['short'] ) || empty( $f['id'] ) ) {
+			continue;
+		}
+		$id          = $f['id'];
+		$out[]       = isset( $byid[ $id ] ) ? array_merge( array( 'img' => isset( $f['img'] ) ? $f['img'] : '' ), $byid[ $id ] ) : canestri_video_auto( $f );
+		$seen[ $id ] = true;
+	}
+	foreach ( $curated as $v ) {
+		if ( ! empty( $v['id'] ) && empty( $seen[ $v['id'] ] ) ) {
+			$out[] = $v;
+		}
+	}
+	if ( $home && ! empty( $data['nascondi_in_home'] ) ) {
+		$hide = (array) $data['nascondi_in_home'];
+		$out  = array_values( array_filter( $out, function ( $v ) use ( $hide ) { return ! in_array( $v['id'], $hide, true ); } ) );
+	}
+	return $out;
+}
+function canestri_video_auto( $f ) {
+	$raw   = isset( $f['title'] ) ? $f['title'] : '';
+	$title = preg_replace( '/#\S+/u', '', $raw );
+	$title = preg_replace( '/\b(info|tel|whatsapp)\s*[:.]?\s*\+?[\d\s]{6,}/iu', '', $title );
+	$title = trim( preg_replace( '/\s+/u', ' ', $title ), " -|:" );
+	if ( '' === $title || preg_match( '/^\d{1,2}\s+\p{L}+\s+\d{4}$/u', $title ) ) {
+		$title = 'Nuovo video';
+	} elseif ( function_exists( 'mb_strtolower' ) && mb_strtoupper( $title ) === $title ) {
+		$title = mb_strtoupper( mb_substr( $title, 0, 1 ) ) . mb_strtolower( mb_substr( $title, 1 ) );
+	}
+	$words = strtolower( preg_replace( '#\#?(https?://|www\.)\S+#i', '', $raw ) );
+	$v     = array( 'id' => $f['id'], 'titolo' => $title, 'tipo' => 'Novità', 'link' => '/contact/', 'testo_link' => 'Chiedi un preventivo', 'img' => isset( $f['img'] ) ? $f['img'] : '' );
+	if ( preg_match( '/limobus|limo bus|discobus|disco bus|funnybus|party bus/', $words ) ) {
+		$v = array_merge( $v, array( 'tipo' => 'Limo e Limobus', 'link' => '/prodotto/disco-bus-15-20-posti/', 'testo_link' => 'Scopri il limobus' ) );
+	} elseif ( preg_match( '/limousine|hummer|stretch/', $words ) ) {
+		$v = array_merge( $v, array( 'tipo' => 'Limo e Limobus', 'link' => '/noleggio-limousine-addio-celibato-nubilato-18-anni-compleanni-roma/', 'testo_link' => 'Scopri le limousine' ) );
+	}
+	if ( 'Nuovo video' === $title ) {
+		foreach ( array( 'hummer' => 'Hummer Limousine', 'chrysler' => 'Chrysler Limousine', 'lincoln' => 'Lincoln Limousine', 'jaguar' => 'Jaguar Limousine', 'discobus' => 'Disco bus a Roma', 'disco bus' => 'Disco bus a Roma', 'limobus' => 'Limobus a Roma', 'limousine' => 'Limousine a Roma', 'matrimon' => 'Auto per matrimonio', 'sposi' => 'Auto per matrimonio' ) as $k => $label ) {
+			if ( false !== strpos( $words, $k ) ) {
+				$v['titolo'] = $label;
+				break;
+			}
+		}
+	}
+	if ( ! empty( $f['published'] ) && strtotime( $f['published'] ) > time() - 30 * DAY_IN_SECONDS ) {
+		$v['tipo'] = 'Novità';
+	}
+	return $v;
+}
+function canestri_video_refresh() {
+	$data = canestri_video_data();
+	if ( empty( $data['canale_id'] ) ) {
+		return;
+	}
+	$res = wp_remote_get( 'https://www.youtube.com/feeds/videos.xml?channel_id=' . rawurlencode( $data['canale_id'] ), array( 'timeout' => 10 ) );
+	if ( is_wp_error( $res ) || 200 !== (int) wp_remote_retrieve_response_code( $res ) || ! function_exists( 'simplexml_load_string' ) ) {
+		return;
+	}
+	$xml = @simplexml_load_string( wp_remote_retrieve_body( $res ) );
+	if ( ! $xml ) {
+		return;
+	}
+	$up    = wp_upload_dir();
+	$dir   = trailingslashit( $up['basedir'] ) . 'canestri-video/';
+	$url   = trailingslashit( $up['baseurl'] ) . 'canestri-video/';
+	$theme = get_stylesheet_directory() . '/assets/video/';
+	wp_mkdir_p( $dir );
+	$items = array();
+	foreach ( $xml->entry as $e ) {
+		$yt    = $e->children( 'http://www.youtube.com/xml/schemas/2015' );
+		$id    = preg_replace( '/[^A-Za-z0-9_-]/', '', (string) $yt->videoId );
+		$link  = (string) $e->link['href'];
+		$short = false !== strpos( $link, '/shorts/' );
+		if ( ! $id ) {
+			continue;
+		}
+		$img = '';
+		if ( is_readable( $theme . $id . '.webp' ) ) {
+			$img = '';
+		} elseif ( is_readable( $dir . $id . '.webp' ) || canestri_video_thumb( $id, $short, $dir . $id . '.webp' ) ) {
+			$img = $url . $id . '.webp';
+		}
+		$items[] = array( 'id' => $id, 'short' => $short, 'title' => (string) $e->title, 'published' => (string) $e->published, 'img' => $img );
+	}
+	if ( $items ) {
+		$old = wp_list_pluck( canestri_video_feed_items(), 'id' );
+		update_option( 'canestri_yt_feed', $items, false );
+		if ( wp_list_pluck( $items, 'id' ) !== $old ) {
+			do_action( 'canestri_video_updated', $items );
+		}
+	}
+}
+function canestri_video_thumb( $id, $short, $dest ) {
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	$names = $short ? array( 'oar2.jpg', 'oardefault.jpg', 'sddefault.jpg', 'hqdefault.jpg' ) : array( 'maxresdefault.jpg', 'sddefault.jpg', 'hqdefault.jpg' );
+	foreach ( $names as $n ) {
+		$tmp = download_url( 'https://i.ytimg.com/vi/' . $id . '/' . $n, 10 );
+		if ( is_wp_error( $tmp ) ) {
+			continue;
+		}
+		$ed = wp_get_image_editor( $tmp );
+		if ( ! is_wp_error( $ed ) ) {
+			$s = $ed->get_size();
+			$w = (int) $s['width'];
+			$h = (int) $s['height'];
+			if ( $w > 0 && $h > 0 ) {
+				$ratio = $short ? 9 / 16 : 16 / 9;
+				if ( $w / $h > $ratio ) {
+					$cw = (int) round( $h * $ratio );
+					$ed->crop( (int) ( ( $w - $cw ) / 2 ), 0, $cw, $h );
+				} else {
+					$ch = (int) round( $w / $ratio );
+					$ed->crop( 0, (int) ( ( $h - $ch ) / 2 ), $w, $ch );
+				}
+				$ed->resize( $short ? 360 : 640, $short ? 640 : 360, true );
+				$ed->set_quality( 72 );
+				$saved = $ed->save( $dest, 'image/webp' );
+				wp_delete_file( $tmp );
+				if ( ! is_wp_error( $saved ) ) {
+					return true;
+				}
+				continue;
+			}
+		}
+		wp_delete_file( $tmp );
+	}
+	return false;
+}
+add_action( 'canestri_video_refresh', 'canestri_video_refresh' );
+add_action(
+	'init',
+	function () {
+		if ( ! wp_next_scheduled( 'canestri_video_refresh' ) ) {
+			wp_schedule_event( time() + 60, 'hourly', 'canestri_video_refresh' );
+		}
+	}
+);
+add_action( 'after_switch_theme', 'canestri_video_refresh' );
+add_action( 'upgrader_process_complete', function () { wp_schedule_single_event( time() + 30, 'canestri_video_refresh' ); } );

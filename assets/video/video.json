@@ -1,27 +1,118 @@
 {
 	"canale": "https://www.youtube.com/@andrea1972roma",
+	"canale_id": "UC0nyy_kK_37SG4nLunpO-zg",
+	"nascondi_in_home": [
+		"teyWyGsjZKU"
+	],
 	"gruppi": {
 		"shorts": [
-			{ "id": "NDdMpTzy__M", "titolo": "La cauzione: ve lo spieghiamo", "tipo": "Domande frequenti", "etichetta": "Più visto", "link": "/contact/", "testo_link": "Chiedi un preventivo" },
-			{ "id": "NGH8QuZO8Nk", "titolo": "Il nostro ultimo video", "tipo": "Novità", "link": "/contact/", "testo_link": "Chiedi un preventivo" },
-			{ "id": "MRu4GXNSbJY", "titolo": "Limousine e limobus a Roma", "tipo": "Limo e Limobus", "link": "/noleggio-limousine-addio-celibato-nubilato-18-anni-compleanni-roma/", "testo_link": "Scopri le limousine" },
-			{ "id": "rXSUvWnf_ZM", "titolo": "Hummer Stretch Limousine", "tipo": "Limo e Limobus", "link": "/noleggio-limousine-addio-celibato-nubilato-18-anni-compleanni-roma/", "testo_link": "Scopri le limousine" },
-			{ "id": "t8WaxBpyySY", "titolo": "Disco bus a Roma", "tipo": "Limo e Limobus", "link": "/prodotto/disco-bus-15-20-posti/", "testo_link": "Scopri il limobus" },
-			{ "id": "1djmTgkFFSs", "titolo": "Hummer N1 Limousine", "tipo": "Limo e Limobus", "link": "/noleggio-limousine-addio-celibato-nubilato-18-anni-compleanni-roma/", "testo_link": "Scopri le limousine" },
-			{ "id": "GX-lDphxvtY", "titolo": "Vip Limo Bus da 15 a 45 posti", "tipo": "Limo e Limobus", "link": "/prodotto/disco-bus-15-20-posti/", "testo_link": "Scopri il limobus" },
-			{ "id": "teyWyGsjZKU", "titolo": "Jaguar Limousine", "tipo": "Limo e Limobus", "link": "/noleggio-limousine-addio-celibato-nubilato-18-anni-compleanni-roma/", "testo_link": "Scopri le limousine" },
-			{ "id": "VCmCCuyZcBA", "titolo": "Limousine Blue Crush", "tipo": "Limo e Limobus", "link": "/noleggio-limousine-addio-celibato-nubilato-18-anni-compleanni-roma/", "testo_link": "Scopri le limousine" },
-			{ "id": "QZRSB9wE12Y", "titolo": "Limo bus con laser show", "tipo": "Limo e Limobus", "link": "/prodotto/disco-bus-15-20-posti/", "testo_link": "Scopri il limobus" },
-			{ "id": "hQIDY78Qsm0", "titolo": "Limobus per 18 anni e compleanni", "tipo": "Feste", "link": "/prodotto/disco-bus-15-20-posti/", "testo_link": "Scopri il limobus" }
+			{
+				"id": "NDdMpTzy__M",
+				"titolo": "La cauzione: ve lo spieghiamo",
+				"tipo": "Domande frequenti",
+				"etichetta": "Più visto",
+				"link": "/contact/",
+				"testo_link": "Chiedi un preventivo"
+			},
+			{
+				"id": "NGH8QuZO8Nk",
+				"titolo": "A bordo delle nostre auto",
+				"tipo": "Novità",
+				"link": "/contact/",
+				"testo_link": "Chiedi un preventivo"
+			},
+			{
+				"id": "MRu4GXNSbJY",
+				"titolo": "Limousine e limobus a Roma",
+				"tipo": "Limo e Limobus",
+				"link": "/noleggio-limousine-addio-celibato-nubilato-18-anni-compleanni-roma/",
+				"testo_link": "Scopri le limousine"
+			},
+			{
+				"id": "rXSUvWnf_ZM",
+				"titolo": "Hummer Stretch Limousine",
+				"tipo": "Limo e Limobus",
+				"link": "/noleggio-limousine-addio-celibato-nubilato-18-anni-compleanni-roma/",
+				"testo_link": "Scopri le limousine"
+			},
+			{
+				"id": "t8WaxBpyySY",
+				"titolo": "Disco bus a Roma",
+				"tipo": "Limo e Limobus",
+				"link": "/prodotto/disco-bus-15-20-posti/",
+				"testo_link": "Scopri il limobus"
+			},
+			{
+				"id": "1djmTgkFFSs",
+				"titolo": "Hummer N1 Limousine",
+				"tipo": "Limo e Limobus",
+				"link": "/noleggio-limousine-addio-celibato-nubilato-18-anni-compleanni-roma/",
+				"testo_link": "Scopri le limousine"
+			},
+			{
+				"id": "GX-lDphxvtY",
+				"titolo": "Vip Limo Bus da 15 a 45 posti",
+				"tipo": "Limo e Limobus",
+				"link": "/prodotto/disco-bus-15-20-posti/",
+				"testo_link": "Scopri il limobus"
+			},
+			{
+				"id": "teyWyGsjZKU",
+				"titolo": "Jaguar Limousine",
+				"tipo": "Limo e Limobus",
+				"link": "/noleggio-limousine-addio-celibato-nubilato-18-anni-compleanni-roma/",
+				"testo_link": "Scopri le limousine"
+			},
+			{
+				"id": "VCmCCuyZcBA",
+				"titolo": "Limousine Blue Crush",
+				"tipo": "Limo e Limobus",
+				"link": "/noleggio-limousine-addio-celibato-nubilato-18-anni-compleanni-roma/",
+				"testo_link": "Scopri le limousine"
+			},
+			{
+				"id": "QZRSB9wE12Y",
+				"titolo": "Limo bus con laser show",
+				"tipo": "Limo e Limobus",
+				"link": "/prodotto/disco-bus-15-20-posti/",
+				"testo_link": "Scopri il limobus"
+			},
+			{
+				"id": "hQIDY78Qsm0",
+				"titolo": "Limobus per 18 anni e compleanni",
+				"tipo": "Feste",
+				"link": "/prodotto/disco-bus-15-20-posti/",
+				"testo_link": "Scopri il limobus"
+			}
 		],
 		"tv": [
-			{ "id": "JlR7oVwkL-c", "titolo": "Il nostro Disco Limo Bus a I Fatti Vostri", "tipo": "Rai 2" },
-			{ "id": "tMERMKgcFaw", "titolo": "Speciale matrimoni a Forum", "tipo": "Mediaset" }
+			{
+				"id": "JlR7oVwkL-c",
+				"titolo": "Il nostro Disco Limo Bus a I Fatti Vostri",
+				"tipo": "Rai 2"
+			},
+			{
+				"id": "tMERMKgcFaw",
+				"titolo": "Speciale matrimoni a Forum",
+				"tipo": "Mediaset"
+			}
 		],
 		"matrimoni": [
-			{ "id": "vNUSQ0jEGEk", "titolo": "Matrimoni di lusso con Rolls Royce e Maybach", "tipo": "Matrimoni" },
-			{ "id": "z4uT1noBl_w", "titolo": "Autonoleggio per cerimonia", "tipo": "Matrimoni" },
-			{ "id": "JZRbR19qKzc", "titolo": "Presentazione Canestri Autonoleggi", "tipo": "Azienda" }
+			{
+				"id": "vNUSQ0jEGEk",
+				"titolo": "Matrimoni di lusso con Rolls Royce e Maybach",
+				"tipo": "Matrimoni"
+			},
+			{
+				"id": "z4uT1noBl_w",
+				"titolo": "Autonoleggio per cerimonia",
+				"tipo": "Matrimoni"
+			},
+			{
+				"id": "JZRbR19qKzc",
+				"titolo": "Presentazione Canestri Autonoleggi",
+				"tipo": "Azienda"
+			}
 		]
 	}
 }
